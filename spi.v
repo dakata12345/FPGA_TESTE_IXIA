@@ -18,7 +18,7 @@ module spi(
 				localparam STATE_IDLE = 2'd1;
 				localparam STATE_RUNNING = 2'd2;
 				
-				reg [7:0] rx_data_reg;
+				reg [7:0] rx_data_reg,tx_data_reg;
 				reg [1:0] next_state,state;
 				reg [7:0] cnt;
 				reg [3:0] cnt_2;
@@ -27,14 +27,18 @@ module spi(
 				reg ok;
 				reg data_transmited;
 	
-	always@(posedge sclk)
+	
+always@(posedge clk)
+	if (~busy) tx_data_reg <=tx_data;
+
+always@(posedge sclk)
 				if (ok) cnt_2 <=0;
 							else if (cnt_2 == 8) cnt_2 <= 4'bz;
 	             								else cnt_2 <= cnt_2 + 1;
 				
   always@(posedge sclk)
 		  	if (~ss_reg) begin
-						  	mosi_reg <= tx_data[cnt_2];
+						  	mosi_reg <= tx_data_reg[cnt_2];
 						  	rx_data_reg[cnt_2] <= miso;
 							 end
 	    			else mosi_reg <= 1'bz;
@@ -108,5 +112,6 @@ module spi(
 		assign mosi = mosi_reg;
 		assign sclk = (~ss_reg) ? clk_out : 1'bz;
 		assign ss = ss_reg;
+		
 	
 	endmodule					
