@@ -1,6 +1,6 @@
-module keyboard(input clk_kb,
+module keyboard(	input clk_kb,
  	              input data_kb,
-			   input rst,
+ 	              input rst,
  	              output reg [7:0] out_reg,
  	              output data_valid
  	              );
@@ -13,7 +13,7 @@ reg flag;
 
 
 
-always @(negedge clk_kb or negedge rst)
+always @(negedge clk_kb)
   if (~rst) begin
      counter = 4'h1;
 	   data_curr = 8'hf0;
@@ -49,6 +49,5 @@ begin
 	else
 		data_pre <= data_curr;
 end
-
-	assign data_valid = flag;
+assign data_valid = flag;
 endmodule 
