@@ -1,5 +1,6 @@
 module keyboard(input clk_kb,
  	              input data_kb,
+			   input rst,
  	              output reg [7:0] out_reg,
  	              output data_valid
  	              );
