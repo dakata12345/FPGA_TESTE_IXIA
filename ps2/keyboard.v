@@ -49,4 +49,5 @@ begin
 		data_pre <= data_curr;
 end
 
+	assign data_valid = flag;
 endmodule 
