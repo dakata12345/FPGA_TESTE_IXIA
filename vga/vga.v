@@ -1,4 +1,4 @@
-module VGA_SYNC(
+module VGA(
 				input clock,
 				input rst,
 				output  h_sync,
@@ -25,25 +25,25 @@ module VGA_SYNC(
 				
 				always @(posedge clock or negedge rst) begin
 				if(~rst) begin
-							h_counter <=0;
-							v_counter <=0;
+							h_counter <=11'b0;
+							v_counter <=11'b0;
 							end
 				else begin
 						if (h_counter < h_total_pixels - 1)
 									h_counter <= h_counter + 1'b1;
 									else 	begin
-											h_counter <= 0;
+											h_counter <= 11'b00;
 											if(v_counter < v_total_pixels - 1) 
 													v_counter <= v_counter + 1'b1;
-											  else v_counter <= 0;
+											  else v_counter <= 11'b0;
 											 end 
 					 	end
 				end						
 				
 				
-				assign h_sync = ((h_counter < (h_visible_area + h_front_porch)) | (h_counter > (h_visible_area + h_front_porch + h_sync_pulse))) ? 1 : 0;
-				assign v_sync = ((v_counter < (v_visible_area + v_front_porch)) | (v_counter > (v_visible_area + v_front_porch + v_sync_pulse))) ? 1 : 0;
-				assign active_zone = ((h_counter < h_visible_area) & (v_counter < v_visible_area)) ? 1 : 0;		
+				assign h_sync = ((h_counter < (h_visible_area + h_front_porch)) | (h_counter > (h_visible_area + h_front_porch + h_sync_pulse))) ? 1'b1 : 1'b0;
+				assign v_sync = ((v_counter < (v_visible_area + v_front_porch)) | (v_counter > (v_visible_area + v_front_porch + v_sync_pulse))) ? 1'b1 : 1'b0;
+				assign active_zone = ((h_counter < h_visible_area) & (v_counter < v_visible_area)) ? 1'b1 : 1'b0;		
 					   
 				
 				assign x_pos = (active_zone) ? h_counter : 11'bz;
