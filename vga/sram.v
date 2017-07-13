@@ -1,4 +1,4 @@
-module sramctrl
+module sram
 	(
 		input  clk,
 		input  rst,
@@ -99,15 +99,15 @@ module sramctrl
 	always@(*) begin
 		if(~rw_in) begin
 			if(addr_in[18]) begin
-				ub_n_out=1'b1;
-				lb_n_out=1'b0;
+				ub_n_out=1'b0;
+				lb_n_out=1'b1;
 				w_data[15:8]=w_data_in;
 				w_data[7:0]=8'b0;
 				r_data_out=r_data[7:0];
 				end 
 			else begin
-				  ub_n_out<=1'b0;
-				  lb_n_out<=1'b1;
+				  ub_n_out<=1'b1;
+				  lb_n_out<=1'b0;
 				  w_data[15:8]<=8'b0;
 				  w_data[7:0]<=w_data_in;
 				  r_data_out<=r_data[15:8];
@@ -116,13 +116,13 @@ module sramctrl
 			else begin
 				if(addr_in[18]) begin
 						ub_n_out=1'b0;
-						lb_n_out=1'b0;
+						lb_n_out=1'b1;
 						w_data[15:8]=w_data_in;
 						w_data[7:0]=8'b0;
 						r_data_out=r_data[7:0];
 						end 
 					else begin
-							ub_n_out=1'b0;
+							ub_n_out=1'b1;
 							lb_n_out=1'b0;
 							w_data[15:8]=8'b0;
 							w_data[7:0]=w_data_in;
