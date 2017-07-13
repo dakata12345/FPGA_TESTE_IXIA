@@ -1,0 +1,113 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 64-Bit
+# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+# Date created = 10:27:30  July 13, 2017
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		top_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name DEVICE EP2C20F484C7
+set_global_assignment -name TOP_LEVEL_ENTITY top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:27:30  JULY 13, 2017"
+set_global_assignment -name LAST_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 484
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 7
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name VERILOG_FILE vga.v
+set_global_assignment -name VERILOG_FILE top.v
+set_global_assignment -name VERILOG_FILE sram.v
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_location_assignment PIN_L1 -to clk
+set_location_assignment PIN_R22 -to rst
+set_location_assignment PIN_B11 -to v_sync
+set_location_assignment PIN_A11 -to h_sync
+set_location_assignment PIN_A8 -to green[3]
+set_location_assignment PIN_B9 -to green[2]
+set_location_assignment PIN_C10 -to green[1]
+set_location_assignment PIN_B8 -to green[0]
+set_location_assignment PIN_B7 -to red[3]
+set_location_assignment PIN_A7 -to red[2]
+set_location_assignment PIN_C9 -to red[1]
+set_location_assignment PIN_D9 -to red[0]
+set_location_assignment PIN_B10 -to blue[3]
+set_location_assignment PIN_A10 -to blue[2]
+set_location_assignment PIN_D11 -to blue[1]
+set_location_assignment PIN_A9 -to blue[0]
+set_location_assignment PIN_Y5 -to addr_out[17]
+set_location_assignment PIN_Y6 -to addr_out[16]
+set_location_assignment PIN_T7 -to addr_out[15]
+set_location_assignment PIN_R10 -to addr_out[14]
+set_location_assignment PIN_U10 -to addr_out[13]
+set_location_assignment PIN_Y10 -to addr_out[12]
+set_location_assignment PIN_T11 -to addr_out[11]
+set_location_assignment PIN_R11 -to addr_out[10]
+set_location_assignment PIN_W11 -to addr_out[9]
+set_location_assignment PIN_V11 -to addr_out[8]
+set_location_assignment PIN_AB11 -to addr_out[7]
+set_location_assignment PIN_AA11 -to addr_out[6]
+set_location_assignment PIN_AB10 -to addr_out[5]
+set_location_assignment PIN_AA5 -to addr_out[4]
+set_location_assignment PIN_AB4 -to addr_out[3]
+set_location_assignment PIN_AA4 -to addr_out[2]
+set_location_assignment PIN_AB3 -to addr_out[1]
+set_location_assignment PIN_AA3 -to addr_out[0]
+set_location_assignment PIN_AB5 -to ce_n_out
+set_location_assignment PIN_Y7 -to lb_n_out
+set_location_assignment PIN_T8 -to oe_n_out
+set_location_assignment PIN_W7 -to ub_n_out
+set_location_assignment PIN_AA10 -to we_n_out
+set_location_assignment PIN_U8 -to data_io[15]
+set_location_assignment PIN_V8 -to data_io[14]
+set_location_assignment PIN_W8 -to data_io[13]
+set_location_assignment PIN_R9 -to data_io[12]
+set_location_assignment PIN_U9 -to data_io[11]
+set_location_assignment PIN_V9 -to data_io[10]
+set_location_assignment PIN_W9 -to data_io[9]
+set_location_assignment PIN_Y9 -to data_io[8]
+set_location_assignment PIN_AB9 -to data_io[7]
+set_location_assignment PIN_AA9 -to data_io[6]
+set_location_assignment PIN_AB8 -to data_io[5]
+set_location_assignment PIN_AA8 -to data_io[4]
+set_location_assignment PIN_AB7 -to data_io[3]
+set_location_assignment PIN_AA7 -to data_io[2]
+set_location_assignment PIN_AB6 -to data_io[1]
+set_location_assignment PIN_AA6 -to data_io[0]
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
