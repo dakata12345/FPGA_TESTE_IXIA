@@ -36,7 +36,7 @@ module top (
 				
 				
 				
-				always@(*) begin
+				/*always@(*) begin
 						if (active_zone) begin
 								if (lb_n_out)begin
 												red[3:1] = data_io[15:13];
@@ -49,6 +49,25 @@ module top (
 											  blue[3:1] = data_io[7:5];
 											  end
 							end
+							else begin
+									red[3:1] = 3'b0;
+									green[3:2] = 2'b0;
+									blue[3:1] = 3'b0;
+									end
+				
+				 red[0] = 1'b0;
+				 green[1:0] = 1'b0;
+				 blue[0] = 1'b0; 
+				end
+				*/
+				always@(*) begin
+						if (active_zone) begin
+												red[3:1] = r_data_out[2:0];
+												green[3:2] = data_io[4:3];
+												blue[3:1] = data_io[7:5];
+												end
+										
+							
 							else begin
 									red[3:1] = 3'b0;
 									green[3:2] = 2'b0;
