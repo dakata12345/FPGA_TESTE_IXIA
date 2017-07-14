@@ -1,3 +1,6 @@
+
+
+
 module sram
 	(
 		input  clk,
@@ -76,20 +79,17 @@ module sram
 					we_n_out	<=	1'b1;
 					r_data	<=	data_io;
 					done_out	<=	1'b0;
-					state		<=	latch;
+					state		<=	idle;
 				end
 				write: begin
 					ce_n_out	<=	1'b0;
 					oe_n_out	<=	1'b1;
 					we_n_out	<=	1'b0;
 					done_out	<=	1'b0;
-					state		<=latch;
+					state		<=idle;
 				end
-				latch: begin
-					r_data	<=	data_io;
-					state<=idle;
-				end
-				default: begin
+			  
+			  default: begin
 					state<=init;
 				end
 				endcase
@@ -102,31 +102,25 @@ module sram
 				ub_n_out=1'b0;
 				lb_n_out=1'b1;
 				w_data[15:8]=w_data_in;
-				w_data[7:0]=8'b0;
-				r_data_out=r_data[7:0];
+				r_data_out = 8'bz;
 				end 
 			else begin
 				  ub_n_out<=1'b1;
 				  lb_n_out<=1'b0;
-				  w_data[15:8]<=8'b0;
 				  w_data[7:0]<=w_data_in;
-				  r_data_out<=r_data[15:8];
+				  r_data_out = 8'bz;
 				  end
 		end 
 			else begin
 				if(addr_in[18]) begin
 						ub_n_out=1'b0;
 						lb_n_out=1'b1;
-						w_data[15:8]=w_data_in;
-						w_data[7:0]=8'b0;
-						r_data_out=r_data[7:0];
+						r_data_out[7:0] =r_data[15:8];
 						end 
 					else begin
 							ub_n_out=1'b1;
 							lb_n_out=1'b0;
-							w_data[15:8]=8'b0;
-							w_data[7:0]=w_data_in;
-							r_data_out=r_data[15:8];
+							r_data_out[7:0] =r_data[7:0];
 							end
 				 end
 	end

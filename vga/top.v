@@ -22,32 +22,45 @@ module top (
 				wire [10:0] x_pos, y_pos;
 				wire trig_in,done_out;
 				
-				wire [18:0] addr_in;
+				reg [18:0] addr_in;
 				//wire [7:0] w_data_in;
+				
 				wire [7:0] r_data_out;
-				reg [18:0] cnt_read,cnt_write;
+				//reg [18:0] cnt_read,cnt_write;
 				reg done;
-				always@(posedge clk)
-							if (~rst) begin
-											cnt_write <=19'b0;
-											done <= 0;
-											end
-								else if (cnt_write == 19'd480000)begin	
-																	cnt_write<=19'b0;
-																	done <= 1;
-																	end
-										else if (active_zone) cnt_write <= cnt_write + 1'b1;
-				
-				always@(posedge clk)
-							if (~done) begin
-							cnt_read <=19'b0;
-							end
-								else if (cnt_read == 19'd480000) cnt_read<=19'b0;
-										else if (active_zone) cnt_read <= cnt_read + 1'b1;
-				
+//				always@(posedge clk or negedge rst)
+//							if (~rst) begin
+//											cnt_write <=19'b0;
+//											done <= 1'b0;
+//											end
+//								else if (cnt_write == 19'd480000)begin	
+//																	cnt_write<=19'b0;
+//																	done <= 1'b1;
+//																	end
+//										else if (active_zone) cnt_write <= cnt_write + 1'b1;
+//				
+//				always@(posedge clk)
+//							if (~done) begin
+//							cnt_read <=19'b0;
+//							end
+//								else if (cnt_read == 19'd480000) cnt_read<=19'b0;
+//										else if (active_zone) cnt_read <= cnt_read + 1'b1;
+//				
 				assign trig_in = 1'b1;
 				//assign rw_in = 1'b1;
-				assign addr_in = (~done) ? cnt_write : cnt_read;
+				
+				always@(*)
+							if (active_zone)
+									if (y_pos > 0)
+												addr_in = (y_pos - 1) * 800 + x_pos;
+										 else addr_in = x_pos;
+								 else addr_in = 19'bz;		 
+				
+				//assign addr_in = active_zone ? (y_pos > 0) ? ((y_pos - 1)*800) + x_pos : x_pos : addr_in; 
+				//assign w_data_in = (cnt_write < 255) ? cnt_write : 0;
+				
+				//assign done = (cnt_write ==  19'd480000) ?  1 : 0;
+				
 				
 													
 				
@@ -94,8 +107,7 @@ module top (
 								 .addr_out(addr_out),
 								 .data_io(data_io));
 				
-		endmodule
-		
+				
 				
 				
 				
@@ -124,3 +136,4 @@ module top (
 										blue = 4'b0000;
 									end
 				*/					
+endmodule
