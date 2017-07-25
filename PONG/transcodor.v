@@ -12,7 +12,7 @@ module transcodor( output reg[6:0] out,
 		 8'h7:  out = 7'b1111000;
 		 8'h8:  out = 7'b0000000;
 		 8'h9:  out = 7'b0010000;
-		 default: out = 7'b0001010;
+		 default: out = 7'b1111111;
 		  endcase
 		  end
   endmodule
