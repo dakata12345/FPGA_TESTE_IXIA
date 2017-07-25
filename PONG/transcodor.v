@@ -1,5 +1,5 @@
 module transcodor( output reg[6:0] out,
-						 input  [3:0] in);
+		   input  [3:0] in);
 		always@(in) begin
 		  case(in)
 		 8'h0 : out =7'b1000000; 
