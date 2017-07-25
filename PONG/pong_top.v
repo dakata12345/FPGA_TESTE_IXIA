@@ -29,10 +29,11 @@
 						.x_pos(x_pos),
 						.y_pos(y_pos));
 			keyboard keyboard(.clock(clock),
-									.ps2_clock(ps2_clock),
-									.ps2_data(ps2_data),
-									.done(done),
-									.tasta(tasta));
+					  .rst(reset),
+					  .ps2_clock(ps2_clock),
+					  .ps2_data(ps2_data),
+					  .done(done),
+					  .tasta(tasta));
 						
 			game_FSM game(.clock(clock),
 							  .reset(reset),
