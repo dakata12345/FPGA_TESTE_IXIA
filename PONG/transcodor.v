@@ -4,7 +4,7 @@ module transcodor( output reg[6:0] out,
 		  case(in)
 		 8'h0 : out =7'b1000000; 
 		 8'h1 : out = 7'b1111001;  
-		 8'h2:  out = 7'b0100100;   //2
+		 8'h2:  out = 7'b0100100;   
 		 8'h3:  out = 7'b0110000;
 		 8'h4:  out = 7'b0011001;
 		 8'h5:  out = 7'b0010010;
