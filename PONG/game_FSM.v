@@ -50,7 +50,7 @@ module game_FSM(
 					localparam screen_height =9'd480;
 					
 					// BORDER and FEATURE size
-					localparam border_size =6;
+					localparam border_size =8'd6;
 					localparam feature_size =11;
 
 					// SPED for computer player
@@ -81,197 +81,194 @@ module game_FSM(
 					reg player_mode; // 0 = single player ; 1 = multiplayer - 2 players
 					reg [1:0] state; // state , next_state register
 			
-					always @(posedge clock or negedge reset)
-						if (~reset)begin
-										ball_speed <= 6'd5;
-										score_player_1 <= 4'd0;
-										score_player_2 <= 4'd0;
-										computer_speed <= computer_speed_default;
-										state <= STATE_RESET;
-										end
-							 else begin
-									if(active_zone) begin
-										if(old_done != done) begin
-											if(done) begin
-												key_pressed <= tasta;
-												end
-												else old_done <= done;
-										end
-		
-										computer_speed <= computer_speed_default;
-										if(x_pos == 1 && y_pos == 1) begin
+always @(posedge clock or negedge reset)
+if (~reset)begin
+			ball_speed <= 6'd5;
+			score_player_1 <= 4'd0;
+			score_player_2 <= 4'd0;
+			computer_speed <= computer_speed_default;
+			state <= STATE_RESET;
+			end
+ else begin
+		if(active_zone) begin
+			if(old_done != done) begin
+				if(done) begin
+					key_pressed <= tasta;
+					end
+					else old_done <= done;
+			end
 
-			
-											case (state)
-											STATE_RESET : begin
-																ball_x <= screen_width / 2; // ball in the center of screen 
-																ball_y <= screen_height / 2;
-						
-																paddle2_x <= screen_width >> 1; // paddle2 up in center y coordonate stays the same
-																paddle2_y <= border_size << 2;
-						
-																paddle1_x <= screen_width >> 1; // paddle 1 position in center of screen bottom with respect to border on y
-																paddle1_y <= screen_height - (border_size << 2);
-						
-																state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
-						
-																score_player_1 <= 4'd0;//reset player scores
-																score_player_2 <= 4'd0;
-													end
-											STATE_PLAYER_SELECT :begin
-																		if (key_pressed == key_1) begin
-																				player_mode <= 1'b0;
-																				key_pressed <= 8'b0;
-																				end else if (key_pressed == key_2) begin
-																				  player_mode <=1'b1;
-																				  key_pressed <= 8'b0;
-																				  end else if (key_pressed == SPACE_key) begin
-																									key_pressed <= 8'b0;
-																									state <= STATE_GAME;		
-																									ball_dx <= 1'b1;//set ball speed and direction
-																									ball_dy <= 1'b1;
-																									ball_speed <= 6'd5;
-																									end
-																			end
-											STATE_GAME : begin
-														    if (key_pressed == SPACE_key) begin
-																	state <= STATE_GAME;
-																	key_pressed <= 8'b0;
-														  	end
-																else if (key_pressed == ESC_key) begin
-																		state <= STATE_RESET;
+			computer_speed <= computer_speed_default;
+			if(x_pos == 1 && y_pos == 1) begin
+
+
+				case (state)
+				STATE_RESET : begin
+									ball_x <= screen_width / 2'd2; // ball in the center of screen 
+									ball_y <= screen_height / 2'd2;
+
+									paddle2_x <= screen_width >> 1; // paddle2 up in center y coordonate stays the same
+									paddle2_y <= border_size << 2;
+
+									paddle1_x <= screen_width >> 1; // paddle 1 position in center of screen bottom with respect to border on y
+									paddle1_y <= screen_height - (border_size << 2);
+
+									state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
+
+									score_player_1 <= 4'd0;//reset player scores
+									score_player_2 <= 4'd0;
+						end
+				STATE_PLAYER_SELECT :begin
+											if (key_pressed == key_1) begin
+													player_mode <= 1'b0;
+													key_pressed <= 8'b0;
+													end else if (key_pressed == key_2) begin
+													  player_mode <=1'b1;
+													  key_pressed <= 8'b0;
+													  end else if (key_pressed == SPACE_key) begin
 																		key_pressed <= 8'b0;
-																end
-												  
-															if (key_pressed == SPACE_key) begin
-																	state <= STATE_PAUSE;
-																	key_pressed <= 8'b0;
-																	end 
-																else if (key_pressed == PLAYER_1_LEFT) begin 
-																			if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
-																					paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
-																					key_pressed <= 8'b0;
-																				end
-																				else if (key_pressed == PLAYER_1_RIGHT) begin
-																							if (paddle1_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
-																									paddle1_x <= paddle1_x + ball_width;
-																									key_pressed <= 8'b0;
-																							end 
-																							else if (key_pressed == PLAYER_2_LEFT) begin
-																							if(player_mode)
-																									if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
-																											paddle2_x <= paddle2_x - ball_width;
-																											key_pressed <= 8'b0;
-																											end
-																											else if (key_pressed == PLAYER_2_RIGHT) begin
-																											if(player_mode)
-																												if (paddle2_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
-																														paddle2_x <= paddle2_x + ball_width;
-																												      key_pressed <= 8'b0;
-																											end
-							
-							
-											    if(speed_counter == ball_speed) begin
-												 			speed_counter <= 6'd0;
-															if(ball_dx) // to right
-																if (ball_x <= screen_width - feature_size - ball_width - (ball_width >> 1)) // check for overflow
-																		ball_x <= ball_x + ball_width;
-																	else	ball_dx <= 1'b0;
-																else if (ball_x >= feature_size + ball_width + (ball_width >> 1))
-																				ball_x <= ball_x - ball_width;
-																		else	ball_dx <= 1'b1;
-																
-												 if(ball_dy) // to down
-													if ((ball_x >= paddle1_x - (paddle_width >> 1)) && (ball_x <= paddle1_x + (paddle_width >> 1)) && (ball_y == paddle1_y - ball_width)) begin
-															ball_dy <= 1'b0;	
-															if(ball_speed > 1)
-																	ball_speed <= ball_speed - 1'b1;
-																	end
-																	else if (ball_y <= screen_height - feature_size - ball_width - (ball_width >> 1))
-																				ball_y <= ball_y + ball_width;
-													else begin
-															ball_dy <= 1'b1;
-															ball_x <= screen_width / 2; 
-															ball_y <= screen_height / 2;
-															ball_speed <= 6'd5;
-															score_player_2 <= score_player_2 + 1'b1;
-															if (score_player_2 == 4'd9) 
-																	state <= STATE_RESET;
-								                    end
-							else if ((ball_x >= paddle2_x - (paddle_width >> 1)) && (ball_x <= paddle2_x + (paddle_width >> 1)) && (ball_y == paddle2_y + ball_width)) begin
-									ball_dy <= 1'b1;
-									if(speed_counter > 1)
-										speed_counter <= speed_counter - 1'b1;
-										end 
-											else if (ball_y >= feature_size + ball_width + (ball_width >> 1))
-														ball_y <= ball_y - ball_width;
-													else begin
-															ball_dy <= 1'b0;
-															ball_x <= screen_width / 2; 
-															ball_y <= screen_height / 2;
-															ball_speed <= 6'd5;
-															score_player_1 <= score_player_1 + 1'b1;
-															if (score_player_1 == 4'd9) 
-																state <= STATE_RESET;
-															end
-								
-							
-						 
-													end
-													else speed_counter <= speed_counter + 1'b1;
-							
-											    if(!player_mode) begin // computer player logic
-													if(computer_counter == computer_speed) begin
-														computer_counter <= 6'd0;
-														if(ball_x > paddle2_x) // move right
-															if (paddle2_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
-																	paddle2_x <= paddle2_x + ball_width;
-										
-														if(ball_x < paddle2_x) //move left
-															if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
-																	paddle2_x <= paddle2_x - ball_width;
-													end
-														else computer_counter <= computer_counter + 1'b1;
-													end
-												end
-
-
-											STATE_PAUSE : begin
-																if (key_pressed == SPACE_key) begin
-																		state <= STATE_GAME;
-																		key_pressed <= 8'b0;
+																		state <= STATE_GAME;		
+																		ball_dx <= 1'b1;//set ball speed and direction
+																		ball_dy <= 1'b1;
+																		ball_speed <= 6'd5;
 																		end
-																	else if (key_pressed == ESC_key) begin
-																				state <= STATE_RESET;
+												end
+				STATE_GAME : begin
+								 if (key_pressed == SPACE_key) begin
+										state <= STATE_GAME;
+										key_pressed <= 8'b0;
+								end
+									else if (key_pressed == ESC_key) begin
+											state <= STATE_RESET;
+											key_pressed <= 8'b0;
+									end
+					  
+								if (key_pressed == SPACE_key) begin
+										state <= STATE_PAUSE;
+										key_pressed <= 8'b0;
+										end 
+									else if (key_pressed == PLAYER_1_LEFT) begin 
+												if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
+														paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
+														key_pressed <= 8'b0;
+													end
+													else if (key_pressed == PLAYER_1_RIGHT) begin
+																if (paddle1_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
+																		paddle1_x <= paddle1_x + ball_width;
+																		key_pressed <= 8'b0;
+																end 
+																else if (key_pressed == PLAYER_2_LEFT) begin
+																if(player_mode)
+																		if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
+																				paddle2_x <= paddle2_x - ball_width;
 																				key_pressed <= 8'b0;
-																			end
-															end
-											default : state <=STATE_RESET;
-											endcase
+																				end
+																				else if (key_pressed == PLAYER_2_RIGHT) begin
+																				if(player_mode)
+																					if (paddle2_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
+																							paddle2_x <= paddle2_x + ball_width;
+																							key_pressed <= 8'b0;
+																				end
+
+
+					 if(speed_counter == ball_speed) begin
+								speed_counter <= 6'd0;
+								if(ball_dx) // to right
+									if (ball_x <= screen_width - feature_size - ball_width - (ball_width >> 1)) // check for overflow
+											ball_x <= ball_x + ball_width;
+										else	ball_dx <= 1'b0;
+									else if (ball_x >= feature_size + ball_width + (ball_width >> 1))
+													ball_x <= ball_x - ball_width;
+											else	ball_dx <= 1'b1;
+									
+					 if(ball_dy) // to down
+						if ((ball_x >= paddle1_x - (paddle_width >> 1)) && (ball_x <= paddle1_x + (paddle_width >> 1)) && (ball_y == paddle1_y - ball_width)) begin
+								ball_dy <= 1'b0;	
+								if(ball_speed > 1)
+										ball_speed <= ball_speed - 1'b1;
 										end
-											//border
-									 if (x_pos <= border_size || x_pos >= screen_width - border_size || (y_pos > 1 && y_pos <= border_size) || y_pos >= screen_height - border_size) 
-											color <= color_white;
-										else if (x_pos <= feature_size || x_pos >= screen_width - feature_size || (y_pos > 1 && y_pos <= feature_size) || y_pos >= screen_height - feature_size) 
-												color <= color_pink;
-											
-										//paddle1 bottom	
-									 if (x_pos >= paddle1_x  - (paddle_width >> 1) && x_pos <= paddle1_x + (paddle_width >> 1) && y_pos >= paddle1_y - (paddle_height >> 1) && y_pos <= paddle1_y  + (paddle_height >> 1))
-												color <= color_red;
+										else if (ball_y <= screen_height - feature_size - ball_width - (ball_width >> 1))
+													ball_y <= ball_y + ball_width;
+						else begin
+								ball_dy <= 1'b1;
+								ball_x <= screen_width / 2'd2; 
+								ball_y <= screen_height / 2'd2;
+								ball_speed <= 6'd5;
+								score_player_2 <= score_player_2 + 1'b1;
+								if (score_player_2 == 4'd9) 
+										state <= STATE_RESET;
+							  end
+			else if ((ball_x >= paddle2_x - (paddle_width >> 1)) && (ball_x <= paddle2_x + (paddle_width >> 1)) && (ball_y == paddle2_y + ball_width)) begin
+					ball_dy <= 1'b1;
+					if(speed_counter > 1)
+						speed_counter <= speed_counter - 1'b1;
+						end 
+				else if (ball_y >= feature_size + ball_width + (ball_width >> 1))
+							ball_y <= ball_y - ball_width;
+						else begin
+								ball_dy <= 1'b0;
+								ball_x <= screen_width / 2'd2; 
+								ball_y <= screen_height / 2'd2;
+								ball_speed <= 6'd5;
+								score_player_1 <= score_player_1 + 1'b1;
+								if (score_player_1 == 4'd9) 
+									state <= STATE_RESET;
+								end
+						end
+						else speed_counter <= speed_counter + 1'b1;
+
+					 if(!player_mode) begin // computer player logic
+						if(computer_counter == computer_speed) begin
+							computer_counter <= 6'd0;
+							if(ball_x > paddle2_x) // move right
+								if (paddle2_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
+										paddle2_x <= paddle2_x + ball_width;
 			
-										//paddle2 top
-										else if (x_pos >= paddle2_x  - (paddle_width >> 1) && x_pos <= paddle2_x + (paddle_width >> 1) && y_pos >= paddle2_y - (paddle_height >> 1) && y_pos <= paddle2_y  + (paddle_height >> 1))
-													if(state == STATE_PLAYER_SELECT)
-														if(player_mode)
-															color <= color_red;
-															else	color <= color_black;
-													else	color <= color_red;
-		
-											//ball
-											else if (x_pos >= ball_x  - (ball_width >> 1) && x_pos <= ball_x + (ball_width >> 1) && y_pos >= ball_y - (ball_height >> 1) && y_pos <= ball_y  + (ball_height >> 1))
-													color <= color_white;
-								// background
-												else color <= color_black;
+							if(ball_x < paddle2_x) //move left
+								if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
+										paddle2_x <= paddle2_x - ball_width;
+						end
+							else computer_counter <= computer_counter + 1'b1;
+						end
+					end
+
+
+				STATE_PAUSE : begin
+									if (key_pressed == SPACE_key) begin
+											state <= STATE_GAME;
+											key_pressed <= 8'b0;
+											end
+										else if (key_pressed == ESC_key) begin
+													state <= STATE_RESET;
+													key_pressed <= 8'b0;
+												end
 								end
-								end
+				default : state <=STATE_RESET;
+				endcase
+			end
+				//border
+		 if (x_pos <= border_size || x_pos >= screen_width - border_size || (y_pos > 1 && y_pos <= border_size) || y_pos >= screen_height - border_size) 
+				color <= color_white;
+			else if (x_pos <= feature_size || x_pos >= screen_width - feature_size || (y_pos > 1 && y_pos <= feature_size) || y_pos >= screen_height - feature_size) 
+					color <= color_pink;
+				
+			//paddle1 bottom	
+		 if (x_pos >= paddle1_x  - (paddle_width >> 1) && x_pos <= paddle1_x + (paddle_width >> 1) && y_pos >= paddle1_y - (paddle_height >> 1) && y_pos <= paddle1_y  + (paddle_height >> 1))
+					color <= color_red;
+
+			//paddle2 top
+			else if (x_pos >= paddle2_x  - (paddle_width >> 1) && x_pos <= paddle2_x + (paddle_width >> 1) && y_pos >= paddle2_y - (paddle_height >> 1) && y_pos <= paddle2_y  + (paddle_height >> 1))
+						if(state == STATE_PLAYER_SELECT)
+							if(player_mode)
+								color <= color_red;
+								else	color <= color_black;
+						else	color <= color_red;
+
+				//ball
+				else if (x_pos >= ball_x  - (ball_width >> 1) && x_pos <= ball_x + (ball_width >> 1) && y_pos >= ball_y - (ball_height >> 1) && y_pos <= ball_y  + (ball_height >> 1))
+						color <= color_white;
+	// background
+					else color <= color_black;
+	end
+	end
 endmodule
