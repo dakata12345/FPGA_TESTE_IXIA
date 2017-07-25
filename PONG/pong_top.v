@@ -1,4 +1,4 @@
-	module pong_top(
+	module pong(
 			 input clock,
 			 input ps2_data, 
 			 input ps2_clock,
@@ -36,7 +36,8 @@
 							  .reset(reset),
 							  .active_zone(active_zone),
 							  .done(done),.tasta(tasta),
-							  .x_pos(x_pos),.y_pos(y_pos),
+							  .x_pos(x_pos),
+							  .y_pos(y_pos),
 							  .color(color),
 							  .score_player_1(score_1),
 							  .score_player_2(score_2));

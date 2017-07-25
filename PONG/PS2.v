@@ -1,7 +1,7 @@
 module keyboard( input clock,
 						input ps2_clock,
 						input ps2_data,
-						
+						input rst,
             output reg done,
             output reg [7:0] tasta);
 
@@ -70,7 +70,7 @@ begin
 	endcase 
 	
 	if (count <= 10 & ~start)
-		count <= count+1;  
+		count <= count+1'b1;  
 	else if(count==11 | stop) 
 		count <= 1; 
 	end	
