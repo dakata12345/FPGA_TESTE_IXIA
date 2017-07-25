@@ -130,7 +130,11 @@ module game_FSM(
 					  if (key_pressed == SPACE_key) begin
 						state <= STATE_PAUSE;
 						key_pressed <= 8'b0;
-						end 
+						end
+				    		else if (key_pressed == ESC_key) begin
+							    state <= STATE_RESET;
+							    key_pressed <= 8'b0;
+							    end
 						else if (key_pressed == PLAYER_1_LEFT) begin 
 							if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
 								paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
