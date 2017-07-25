@@ -23,11 +23,11 @@ module game_FSM(
 					
 					//PLAYER 1 KEYS
 					localparam PLAYER_1_RIGHT = 8'h23; //D
-				   	localparam 	PLAYER_1_LEFT= 8'h1C; //A
+				   	localparam PLAYER_1_LEFT= 8'h1C; //A
 					
 					//PLAYER 2 KEYS
 					localparam PLAYER_2_RIGHT = 8'h4B; //L
-				   	localparam 	PLAYER_2_LEFT= 8'h3B; //J
+				   	localparam PLAYER_2_LEFT= 8'h3B; //J
 					
 					//CONTROL KEYS
 					localparam ESC_key = 8'h76; //ESC
@@ -59,7 +59,7 @@ module game_FSM(
 					// COLORS
 				   	localparam  color_red =12'b111100000000;
 					localparam  color_blue =12'b000000001111;
-					localparam	color_white =12'b111111111111;
+					localparam  color_white =12'b111111111111;
 				   	localparam  color_black =12'b000000000000;
 				   	localparam  color_pink =12'b111001110110;
 					
