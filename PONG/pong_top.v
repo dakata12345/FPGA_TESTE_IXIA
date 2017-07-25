@@ -7,7 +7,9 @@
 			 output v_sync,
 			 output [11:0]color,
 			 output [6:0] out_1,
-			 output [6:0] out_2
+			 output [6:0] out_2,
+			 output [6:0] out_3,
+			 output [6:0] out_4
 			);
 			
 			wire clk_25,active_zone,done;
@@ -45,5 +47,7 @@
 			transcodor score1(.in(score_1),.out(out_1));
 			
 			transcodor score2(.in(score_2),.out(out_2));
+			assign out_3 = 7'b1111111;
+			assign out_4 = 7'b1111111;
 
 endmodule									
