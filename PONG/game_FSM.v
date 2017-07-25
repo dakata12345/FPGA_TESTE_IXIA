@@ -269,15 +269,15 @@ module game_FSM(
 					end
 end
 
-					always@(posedge clock) begin
-					if (active_zone) begin	//border
-					 if (x_pos <= border_size || x_pos >= screen_width - border_size || (y_pos <= border_size) || y_pos >= screen_height - border_size) 
-							color <= color_white;
-						else if (x_pos <= feature_size || x_pos >= screen_width - feature_size || (y_pos <= feature_size) || y_pos >= screen_height - feature_size) 
-								color <= color_pink;
-							
+	 always@(posedge clock) begin
+  	if (active_zone) begin	//border
+		 if (x_pos <= border_size || x_pos >= screen_width - border_size || (y_pos <= border_size) || y_pos >= screen_height - border_size) 
+				color <= color_white;
+				else if (x_pos <= feature_size || x_pos >= screen_width - feature_size || (y_pos <= feature_size) || y_pos >= screen_height - feature_size) 
+						color <= color_pink;
+						
 						//paddle1 bottom	
-					 else if (x_pos >= paddle1_x  - (paddle_width >> 1) && x_pos <= paddle1_x + (paddle_width >> 1) && y_pos >= paddle1_y - (paddle_height >> 1) && y_pos <= paddle1_y  + (paddle_height >> 1))
+					else if (x_pos >= paddle1_x  - (paddle_width >> 1) && x_pos <= paddle1_x + (paddle_width >> 1) && y_pos >= paddle1_y - (paddle_height >> 1) && y_pos <= paddle1_y  + (paddle_height >> 1))
 								color <= color_red;
 				
 						//paddle2 top
