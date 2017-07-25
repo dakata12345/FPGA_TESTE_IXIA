@@ -4,7 +4,7 @@ module game_FSM(
 					input active_zone,
 					input done,
 					input [7:0] tasta,
-				   input [9:0] x_pos,
+				        input [9:0] x_pos,
 					input [9:0] y_pos,
 					output reg [11:0]color,
 					output reg [3:0] score_player_1,
@@ -23,11 +23,11 @@ module game_FSM(
 					
 					//PLAYER 1 KEYS
 					localparam PLAYER_1_RIGHT = 8'h23; //D
-				   localparam 	PLAYER_1_LEFT= 8'h1C; //A
+				   	localparam 	PLAYER_1_LEFT= 8'h1C; //A
 					
 					//PLAYER 2 KEYS
 					localparam PLAYER_2_RIGHT = 8'h4B; //L
-				   localparam 	PLAYER_2_LEFT= 8'h3B; //J
+				   	localparam 	PLAYER_2_LEFT= 8'h3B; //J
 					
 					//CONTROL KEYS
 					localparam ESC_key = 8'h76; //ESC
@@ -57,11 +57,11 @@ module game_FSM(
 					localparam computer_speed_default= 6'd4;
 					
 					// COLORS
-				   localparam  color_red =12'b111100000000;
+				   	localparam  color_red =12'b111100000000;
 					localparam  color_blue =12'b000000001111;
 					localparam	color_white =12'b111111111111;
-				   localparam  color_black =12'b000000000000;
-				   localparam  color_pink =12'b111001110110;
+				   	localparam  color_black =12'b000000000000;
+				   	localparam  color_pink =12'b111001110110;
 					
 					//REG and WIRES declarations
 					
@@ -81,66 +81,59 @@ module game_FSM(
 					reg player_mode; // 0 = single player ; 1 = multiplayer - 2 players
 					reg [1:0] state; // state , next_state register
 			
-always @(posedge clock or negedge reset)
-		if (~reset)begin
-				ball_speed <= 6'd5;
-				score_player_1 <= 4'd0;
-				score_player_2 <= 4'd0;
-				computer_speed <= computer_speed_default;
-				state <= STATE_RESET;
+	always @(posedge clock or negedge reset)
+		if (~reset) begin
+		   ball_speed <= 6'd5;
+	   	   score_player_1 <= 4'd0;
+		   score_player_2 <= 4'd0;
+		   computer_speed <= computer_speed_default;
+		   state <= STATE_RESET;
+		   end
+		 else begin
+		      if(active_zone) begin
+			 if(old_done != done) begin
+			    if(done) begin
+				key_pressed <= tasta;
 				end
-				 else begin
-						if(active_zone) begin
-							if(old_done != done) begin
-								if(done) begin
-									key_pressed <= tasta;
-									end
-									else old_done <= done;
-							end
-				
-							computer_speed <= computer_speed_default;
-							if(x_pos == 1 && y_pos == 1) begin
-				
-				
-								case (state)
-								STATE_RESET : begin
-													ball_x <= screen_width >>1; // ball in the center of screen 
-													ball_y <= screen_height >> 1;
-				
-													paddle2_x <= screen_width >> 1; // paddle2 up in center y coordonate stays the same
-													paddle2_y <= border_size << 2;
-				
-													paddle1_x <= screen_width >> 1; // paddle 1 position in center of screen bottom with respect to border on y
-													paddle1_y <= screen_height - (border_size << 2);
-				
-													state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
-				
-													score_player_1 <= 4'd0;//reset player scores
-													score_player_2 <= 4'd0;
-										end
-								STATE_PLAYER_SELECT :begin
-															if (key_pressed == key_1) begin
-																	player_mode <= 1'b0;
-																	key_pressed <= 8'b0;
-																	end else if (key_pressed == key_2) begin
-																	  player_mode <=1'b1;
-																	  key_pressed <= 8'b0;
-																	  end else if (key_pressed == SPACE_key) begin
-																						key_pressed <= 8'b0;
-																						state <= STATE_GAME;		
-																						ball_dx <= 1'b1;//set ball speed and direction
-																						ball_dy <= 1'b1;
-																						ball_speed <= 6'd5;
-																						end
-																end
-								STATE_GAME : begin
-													if (key_pressed == SPACE_key) begin
-															state <= STATE_PAUSE;
-															key_pressed <= 8'b0;
-														end 
-													else if (key_pressed == PLAYER_1_LEFT) begin 
-																if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
-																		paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
+				else old_done <= done;
+				end
+			  computer_speed <= computer_speed_default;
+			  if(x_pos == 1 && y_pos == 1) begin
+   			     case (state)
+			     STATE_RESET : begin
+				 	   ball_x <= screen_width >>1; // ball in the center of screen 
+					   ball_y <= screen_height >> 1;
+				  	   paddle2_x <= screen_width >> 1; // paddle2 up in center y coordonate stays the same
+					   paddle2_y <= border_size << 2;
+				 	   paddle1_x <= screen_width >> 1; // paddle 1 position in center of screen bottom with respect to border on y
+					   paddle1_y <= screen_height - (border_size << 2);
+				 	   state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
+					   score_player_1 <= 4'd0;//reset player scores
+					   score_player_2 <= 4'd0;
+					   end
+			    STATE_PLAYER_SELECT :begin
+						 if (key_pressed == key_1) begin
+						    player_mode <= 1'b0;
+						    key_pressed <= 8'b0;
+						    end else if (key_pressed == key_2) begin
+								  player_mode <=1'b1;
+								  key_pressed <= 8'b0;
+								  end else if (key_pressed == SPACE_key) begin
+										key_pressed <= 8'b0;
+										state <= STATE_GAME;		
+										ball_dx <= 1'b1;//set ball speed and direction
+										ball_dy <= 1'b1;
+										ball_speed <= 6'd5;
+								                end
+						   end
+			    STATE_GAME : begin
+					  if (key_pressed == SPACE_key) begin
+						state <= STATE_PAUSE;
+						key_pressed <= 8'b0;
+						end 
+						else if (key_pressed == PLAYER_1_LEFT) begin 
+							if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
+								paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
 																		key_pressed <= 8'b0;
 																	end
 																	else if (key_pressed == PLAYER_1_RIGHT) begin
