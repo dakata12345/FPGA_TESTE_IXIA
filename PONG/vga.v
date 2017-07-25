@@ -47,6 +47,6 @@ module vga(
 				assign active_zone = ((h_counter < h_visible_area) & (v_counter < v_visible_area)) ? 1'b1 : 1'b0;		
 					   
 				
-				assign x_pos = active_zone ?  h_counter : 10'bz;
-				assign y_pos = active_zone  ? v_counter : 10'bz;	
+				assign x_pos = active_zone ?  h_counter : 10'b0;
+				assign y_pos = active_zone  ? v_counter : 10'b0;	
 endmodule
