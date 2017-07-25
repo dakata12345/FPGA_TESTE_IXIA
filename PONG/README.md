@@ -26,10 +26,12 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
   ## PLAYER1:
             A -> miscarea plaetei catre stanga
             D -> miscarea paletei catre dreapta
-    ## PLAYER2:
+  
+  ## PLAYER2:
             J -> miscarea plaetei catre stanga
             L -> miscarea paletei catre dreapta  
-    ## Taste de control
+  
+  ## Taste de control
               1 -> SinglePlayer (vs Computer)
               2 -> Multiplayer
               SPACE -> START/PAUSE
