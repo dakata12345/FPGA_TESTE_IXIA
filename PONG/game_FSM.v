@@ -229,29 +229,29 @@ module game_FSM(
 										end
 									end
 								STATE_PLAYER2_SCORE : begin
-															 if (score_player_2 == 4'd9) 
-																	state <= STATE_RESET;
-															  if (key_pressed == SPACE_key) begin
-																	state <= STATE_GAME;
-																	key_pressed <= 8'b0;
-																end
-																if (key_pressed == ESC_key) begin
-																	state <= STATE_RESET;
-																	key_pressed <= 8'b0;
-																end	
-															end		
+										      if (score_player_2 == 4'd9) 
+											  state <= STATE_RESET;
+										      if (key_pressed == SPACE_key) begin
+												state <= STATE_GAME;
+												key_pressed <= 8'b0;
+												end
+										      if (key_pressed == ESC_key) begin
+											     state <= STATE_RESET;
+											     key_pressed <= 8'b0;
+											     end	
+											end		
 								STATE_PLAYER1_SCORE : begin
-															 if (score_player_1 == 4'd9) 
-																	state <= STATE_RESET;									
-															 if (key_pressed == SPACE_key) begin
-																	state <= STATE_GAME;
-																	key_pressed <= 8'b0;
-																end
-															 if (key_pressed == ESC_key) begin
-																	state <= STATE_RESET;
-																	key_pressed <= 8'b0;
-																end	
-															end	
+										      if (score_player_1 == 4'd9) 
+											  state <= STATE_RESET;									
+										      if (key_pressed == SPACE_key) begin
+											  state <= STATE_GAME;
+											  key_pressed <= 8'b0;
+											  end
+										      if (key_pressed == ESC_key) begin
+											  state <= STATE_RESET;
+											  key_pressed <= 8'b0;
+											  end	
+										      end	
 								STATE_PAUSE : begin
 									      if (key_pressed == SPACE_key) begin
 										   state <= STATE_GAME;
