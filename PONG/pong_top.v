@@ -41,10 +41,8 @@
 							  .score_player_1(score_1),
 							  .score_player_2(score_2));
 						
-			transcodor score1(.in(score_1),
-									.out(out_1));
+			transcodor score1(.in(score_1),.out(out_1));
 			
-			transcodor score2(.in(score_2),
-									.out(out_2));
+			transcodor score2(.in(score_2),.out(out_2));
 
 endmodule									
