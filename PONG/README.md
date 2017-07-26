@@ -12,7 +12,7 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 ## Introducere: Conceptul și regulile jocului
  Scopul principal al jocului este obtinerea de 9 puncte acumulate de catre un jucator  in urma lovirii mingii de border-ul special din spatele paletei adversarului. Am incorporat 2 moduri diferite de joc : single player , multiplayer(2 jucatori). Tastele prin care se selecteaza modul de joc sunt butoanele de la tastatura "1" si "2".
 ## Multiplayer
- 1.Se apasa pe butonul "2" de la tastatura.
+  1.Se apasa pe butonul "2" de la tastatura.
  
  2. Dupa ce a aparut paleta in partea de sus a ecranului, prin apasarea tastei SPACE jocul poate incepe.
  
@@ -21,9 +21,9 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
  4. In orice moment se poate apasa pe tasta ESC pentru a se iesi din joc si a incepe un altul.
  
  ## SinglePlayer(VS computer)
- 1.Se apasa pe butonul "1" de la tastatura sau se apasa direct pe tasta SPACE.
+  1.Se apasa pe butonul "1" de la tastatura sau se apasa direct pe tasta SPACE.
  
- 2.Paleta apare automat in partea  de sus a ecranului, iar PLAYER2 va fi o simulare a inteligentei artificiale care incearca sa urmareasca deplasarea mingii si sa contracareze incercarile de a inscrie ale PLAYER1 .
+  2.Paleta apare automat in partea  de sus a ecranului, iar PLAYER2 va fi o simulare a inteligentei artificiale care incearca sa            urmareasca deplasarea mingii si sa contracareze incercarile de a inscrie ale PLAYER1 .
  
  3. Dupa ce un jucator inscrie scorul este actualizat pe afisazul cu 7 segmente , cifra de pe afisaj notata cu HEX0 corespunzand jucatorului numarul 1, iar cifra de pe afisaj notata cu HEX3 corespunde jucatorului cu numarul 2 si totodata in mod automat dupa fiecare punct inscris jocul intra in pauza si asteapta apasarea tastei SPACE pentru a fi reluat.
  
