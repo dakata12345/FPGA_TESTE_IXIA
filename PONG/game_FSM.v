@@ -25,11 +25,11 @@ module game_FSM(
 					
 					//PLAYER 1 KEYS
 					localparam PLAYER_1_RIGHT = 8'h23; //D
-				   	localparam 	PLAYER_1_LEFT= 8'h1C; //A
+				   	localparam PLAYER_1_LEFT= 8'h1C; //A
 					
 					//PLAYER 2 KEYS
 					localparam PLAYER_2_RIGHT = 8'h4B; //L
-				   	localparam 	PLAYER_2_LEFT= 8'h3B; //J
+				   	localparam PLAYER_2_LEFT= 8'h3B; //J
 					
 					//CONTROL KEYS
 					localparam ESC_key = 8'h76; //ESC
@@ -59,11 +59,11 @@ module game_FSM(
 					localparam computer_speed_default= 6'd4;
 					
 					// COLORS
-				   	localparam  color_red =12'b111100000000;
-					localparam  color_blue =12'b000000001111;
-					localparam	color_white =12'b111111111111;
-				   	localparam  color_black =12'b000000000000;
-				   	localparam  color_pink =12'b111001110110;
+				   	localparam color_red =12'b111100000000;
+					localparam color_blue =12'b000000001111;
+					localparam color_white =12'b111111111111;
+				   	localparam color_black =12'b000000000000;
+				   	localparam color_pink =12'b111001110110;
 					
 					//REG and WIRES declarations
 					
@@ -84,22 +84,14 @@ module game_FSM(
 					reg [2:0] state; // state , next_state register
 			
 	always @(posedge clock or negedge reset)
-		if (~reset) begin
-		   ball_speed <= 6'd5;
-	   	   score_player_1 <= 4'd0;
-		   score_player_2 <= 4'd0;
-		   computer_speed <= computer_speed_default;
-		   state <= STATE_RESET;
-		   end
-		 else begin
-		      if(active_zone) begin
-			 if(old_done != done) begin
-			    if(done) begin
-				key_pressed <= tasta;
+		if (~reset) state <= STATE_RESET;
+		    else begin
+		      	if(active_zone) begin
+			  if(old_done != done) begin
+				  if(done) key_pressed <= tasta;
+				    else old_done <= done;
 				end
-				else old_done <= done;
-				end
-			  computer_speed <= computer_speed_default;
+			  
 			  if(x_pos == 1 && y_pos == 1) begin
    			     case (state)
 			     STATE_RESET : begin
@@ -115,6 +107,8 @@ module game_FSM(
 					   speed_counter <= 6'd0;
 					   computer_counter <= 6'd0;
 				     	   player_mode <= 1'b0;	
+				     	   ball_speed <= 6'd5;
+				     	   computer_speed <= computer_speed_default;
 					   end
 			    STATE_PLAYER_SELECT :begin
 						 if (key_pressed == key_1) begin
