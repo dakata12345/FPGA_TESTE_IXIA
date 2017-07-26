@@ -14,7 +14,7 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 ## Multiplayer
  1.Se apasa pe butonul "2" de la tastatura.
  2. Dupa ce a aparut paleta in partea de sus a ecranului, prin apasarea tastei SPACE jocul poate incepe.
- 3. Dupa ce un jucator inscrie scorul este actualizat pe afisazul cu 7 segmente , cifra de pe afisaj notata cu HEX0 corespunzand jucatorului numarul 1, iar cifra de pe afisaj notata cu HEX3 corespunde jucatorului cu numarul 2 si totodata in mod automat dupa fiecare punct inscris jocul intra in pauza si asteapta apasarea tastei space pentru a fi reluat.
+ 3. Dupa ce un jucator inscrie scorul este actualizat pe afisazul cu 7 segmente , cifra de pe afisaj notata cu HEX0 corespunzand jucatorului numarul 2, iar cifra de pe afisaj notata cu HEX3 corespunde jucatorului cu numarul 1 si totodata in mod automat dupa fiecare punct inscris jocul intra in pauza si asteapta apasarea tastei space pentru a fi reluat.
  4. In orice moment se poate apasa pe tasta ESC pentru a se iesi din joc si a incepe un altul.
  
  ## SinglePlayer(VS computer)
