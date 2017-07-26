@@ -3,8 +3,8 @@ game_FSM
 Acest modul reprezinta nucleul jocului pong. Contine automatul care controleaza flow-ul jocului si totodata logica jocului. El transmite ca
 si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecranul monitorului.
 
-## Starile automatului
-          ## 1. STATE_RESET :
+## Starile automatului 
+  /        ## 1. STATE_RESET :
           ball_x <= screen_width >>1; 
 					ball_y <= screen_height >> 1;
 				  paddle2_x <= screen_width >> 1; 
@@ -72,10 +72,10 @@ si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecra
               Daca mingea merge la stanga pozitia de pe x a mingii este evident decrementata si atunci si pozitia padului de pe x a lui player 2 este decrementata. Simtetric se intampla pentru o depalsare la dreapta.
               Daca counterul nu a ajuns la acea valoare va numara in continuare.
               
-              ## 4 STATE_PLAYER1_SCORE : 
+/              ## 4 STATE_PLAYER1_SCORE : 
                   Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta
               
-              ## 5 STATE_PLAYER2_SCORE :
+ /             ## 5 STATE_PLAYER2_SCORE :
                   Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta
               
 					    ## 6 STATE_PAUSE :
