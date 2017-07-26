@@ -218,11 +218,11 @@ module game_FSM(
 										if(computer_counter == computer_speed) begin
 											computer_counter <= 6'd0;
 											if(ball_x > paddle2_x) // move right
-												if (paddle2_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
+												if (paddle2_x <= screen_width - feature_size - border_size - (paddle_width >> 1))
 														paddle2_x <= paddle2_x + ball_width;
 							
 											if(ball_x < paddle2_x) //move left
-												if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
+												if (paddle2_x >= feature_size + border_size + (paddle_width >> 1))
 														paddle2_x <= paddle2_x - ball_width;
 										end
 											else computer_counter <= computer_counter + 1'b1;
