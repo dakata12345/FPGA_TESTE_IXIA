@@ -112,8 +112,9 @@ module game_FSM(
 				 	   state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
 					   score_player_1 <= 4'd0;//reset player scores
 					   score_player_2 <= 4'd0;
-						speed_counter <= 6'd0;
-						computer_counter <= 6'd0;
+					   speed_counter <= 6'd0;
+					   computer_counter <= 6'd0;
+				     	   player_mode <= 1'b0;	
 					   end
 			    STATE_PLAYER_SELECT :begin
 						 if (key_pressed == key_1) begin
