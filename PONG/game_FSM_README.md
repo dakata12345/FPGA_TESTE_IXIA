@@ -5,19 +5,19 @@ si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecra
 
 ## Starile automatului
 ## 1. STATE_RESET :
-ball_x <= screen_width >>1;
-ball_y <= screen_height >> 1;
-paddle2_x <= screen_width >> 1;
-paddle2_y <= border_size << 2;
-paddle1_x <= screen_width >> 1;
-paddle1_y <= screen_height - (border_size << 2);
-state <= STATE_PLAYER_SELECT;
-score_player_1 <= 4'd0;
-score_player_2 <= 4'd0;
-speed_counter <= 6'd0;
-computer_counter <= 6'd0;
-Starea de reset , starea in care sunt date poziitiile pe x,y pentru palete, pozitiile pe x,y pentru minge ( mingea este
-setata sa apara in centrul ecranului ). De asemenea paleta jucatorului 2 nu va aparea decat in momentul in care este selectat modul multiplayer
+      ball_x <= screen_width >>1;
+      ball_y <= screen_height >> 1;
+      paddle2_x <= screen_width >> 1;
+      paddle2_y <= border_size << 2;
+      paddle1_x <= screen_width >> 1;
+      paddle1_y <= screen_height - (border_size << 2);
+      state <= STATE_PLAYER_SELECT;
+      score_player_1 <= 4'd0;
+      score_player_2 <= 4'd0;
+      speed_counter <= 6'd0;
+      computer_counter <= 6'd0;
+      Starea de reset , starea in care sunt date poziitiile pe x,y pentru palete, pozitiile pe x,y pentru minge ( mingea este
+      setata sa apara in centrul ecranului ). De asemenea paleta jucatorului 2 nu va aparea decat in momentul in care este selectat           modul multiplayer
 Se observa totusi ca :
 - Pentru paleta jucatorului 1 au fost lasate 12 coloane libere intre aceasta si border (paddle1_y <= screen_height - 			    (border_size << 2) linia de cod amintita insemnand faptul ca pozitia pe y a paletei o sa fie screen_height - border*4 =480-		    24 = 456. Pozitia pe x pentru ambele padduri
 este identica fiind situata in centrul ecranului(320 = screen_width/2). Pozitia pe y a paletei jucatorului 2 este paddle2_y <= border_size << 2 adica 24
