@@ -143,15 +143,25 @@ Daca mingea merge la stanga pozitia de pe x a mingii este evident decrementata s
 Daca counterul nu a ajuns la acea valoare va numara in continuare.
 
 ## 4. STATE_PLAYER1_SCORE :
-Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta
+Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta.
 
 ## 5. STATE_PLAYER2_SCORE :
-Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta
+Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta.
 
 ## 6. STATE_PAUSE :
-In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se paote iesi apasand pe SPACE pentru a 			  relua jocul sau ESC pentru reset
+In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se paote iesi apasand pe SPACE pentru a 			  relua jocul sau ESC pentru reset.
 
 
+
+## Transmitrea culorilor catre ecranul monitorului
+   Transmiterea culorilor este facuta tot de acest modul intr-un proces always sensibil la frontul pozitiv al ceasului, separat de cel al automatului.  
+ 
+ ##  Border
+  Daca este in zona activa si daca pozitia pe x este <= cu border_size ( inseamna margina din partea stanga) sau daca pozitia pe x este >= screen_width - border_size (marginea din partea dreapta) sau daca pozitia pe y <= border_size ( marginea de sus) sau pozitia pe y >= screen_height - border_size (marginea de jos) atunci culoarea transmisa monitorului este alb.
+  Totodata condiitile sunt simetrice si pentru feature_size culoarea fiind roz.
+  Pentru a desena paddle-ul pentru player1 tinem cont ca pozitia pe x si y reprezinta un singur pixel si alegem sa desenam un dreptunghi
+  astfel : daca pozitia pe x se afla intre paddle_x si + sau - paddle_width ( ceea ce inseamna ca desenam la stanga si la dreapta pozitiei pe x) si pozitia pe  y se afla paddle_y + sau - paddle_height (desenam in susul si in josul pozitiei pe y a paddleului) atunci transmitem monitorului culoarea rosu. Aceasta logica este simtetrica pentru ambele paddle-uri dar si pentru minge avand ball_x si ball_y.
+  In rest culoarea transmisa este negru , inclusiv daca nu suntem in zona activa.
 
 
   
