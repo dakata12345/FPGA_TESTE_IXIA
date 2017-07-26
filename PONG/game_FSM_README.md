@@ -27,7 +27,7 @@ Totodata in aceasta stare sunt resetate scorurile playerilor , counterul ce este
 - Tranzitia in starea urmatoare nu are la baza vreo conditie si este implicita.
 
 ## 2 STATE_PLAYER_SELECT :
-Aceasta stare nu necesita o explicatie amanuntita deoarece este foarte clar care este functionalitatea: ea genereaza   	             semnalul.
+Aceasta stare nu necesita o explicatie amanuntita deoarece este foarte clar care este functionalitatea: ea genereaza   	             semnalul
 prin care se alege modul de joc in functie de inputul primit de la tastatura. Totodata in aceasta stare este setata directia 	     pe axa x si  y (ball_dx ,ball_dy) odata ce a fost selectat modul de joc.
 
 ## 3 STATE_GAME :
