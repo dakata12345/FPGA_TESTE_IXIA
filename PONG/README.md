@@ -100,11 +100,11 @@ ceea ce inseamna exact ca la pozitia pentru paddle 1 o diferenta de 24 linii ( c
 Totodata in aceasta stare sunt resetate scorurile playerilor , counterul ce este folosit pentru a determina viteza cu care se 	   deplaseaza mingea  si counterul pentru computer care este folosit in acelasi mod.
 - Tranzitia in starea urmatoare nu are la baza vreo conditie si este implicita.
 
-## 2 STATE_PLAYER_SELECT :
+## 2. STATE_PLAYER_SELECT :
 Aceasta stare nu necesita o explicatie amanuntita deoarece este foarte clar care este functionalitatea: ea genereaza   	             semnalul
 prin care se alege modul de joc in functie de inputul primit de la tastatura. Totodata in aceasta stare este setata directia 	     pe axa x si  y (ball_dx ,ball_dy) odata ce a fost selectat modul de joc.
 
-## 3 STATE_GAME :
+## 3. STATE_GAME :
 Aceasta este starea care contine logica efectiva a jocului , tranzitia in aceasta facandu-se din starea anterioara numai 		      la apasarea tastei SPACE.
 Logica acestei stari este urmatoarea , daca este apasat butonul SPACE se trece imediat in starea de pauza daca este apasat 	       butonul ESC se trece in starea de reset
 Daca este apasata tasta A se verifica o conditie astfel incat sa nu se depaseasca zona destinata jocului (acel 			      feature_size + o jumatate de paleta + latura patratului din
@@ -142,13 +142,13 @@ este verificata conditia de overflow pentru ca padul sa nu iasa din zona de joc 
 Daca mingea merge la stanga pozitia de pe x a mingii este evident decrementata si atunci si pozitia padului de pe x a lui 	      player 2 este decrementata. Simtetric se intampla pentru o depalsare la dreapta.
 Daca counterul nu a ajuns la acea valoare va numara in continuare.
 
-## 4 STATE_PLAYER1_SCORE :
+## 4. STATE_PLAYER1_SCORE :
 Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta
 
-## 5 STATE_PLAYER2_SCORE :
+## 5. STATE_PLAYER2_SCORE :
 Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a relua jocul sau ESC pentru a-l reseta
 
-## 6 STATE_PAUSE :
+## 6. STATE_PAUSE :
 In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se paote iesi apasand pe SPACE pentru a 			  relua jocul sau ESC pentru reset
 
 
