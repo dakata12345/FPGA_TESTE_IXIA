@@ -24,7 +24,7 @@ Se observa totusi ca :
 este identica fiind situata in centrul ecranului(320 = screen_width/2). Pozitia pe y a paletei jucatorului 2 este paddle2_y <= border_size << 2 adica 24
 ceea ce inseamna exact ca la pozitia pentru paddle 1 o diferenta de 24 linii ( ceea ce simbolizeaza sfarsitul lui feature_size + 13 linii lasate negre).
 Totodata in aceasta stare sunt resetate scorurile playerilor , counterul ce este folosit pentru a determina viteza cu care se 	   deplaseaza mingea  si counterul pentru computer care este folosit in acelasi mod.
-- Trnazitia in starea urmatoare nu are la baza vreo conditie si este implicita.
+- Tranzitia in starea urmatoare nu are la baza vreo conditie si este implicita.
 
 ## 2 STATE_PLAYER_SELECT :
 Aceasta stare nu necesita o explicatie amanuntita deoarece este foarte clar care este functionalitatea: ea genereaza   	             semnalul.
