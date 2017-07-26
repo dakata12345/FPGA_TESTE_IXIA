@@ -36,6 +36,7 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
               2 -> Multiplayer
               SPACE -> START/PAUSE
               ESC -> Exit current game 
+              KEY1 de pee FPGA este RESET
 <img src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/PongVideoGameCabinet.jpg/250px-PongVideoGameCabinet.jpg" />
 
 ## Top-level block diagram 
