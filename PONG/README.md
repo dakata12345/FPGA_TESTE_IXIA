@@ -41,7 +41,7 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 ## Top-level block diagram 
  Aceasta reprezinta schema interconectarii blocurilor
 
-<img src="http://imgur.com/9754B0A"/>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/JHNMm"><a href="//imgur.com/JHNMm"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 ## Inputs: 
 
