@@ -171,7 +171,7 @@ module game_FSM(
 									 if(ball_speed > 1)
 									    ball_speed <= ball_speed - 1'b1;
 									 end
-									else if (ball_y <= screen_height - feature_size - border_size)
+									else if (ball_y <= screen_height - feature_size - ball_width - (ball_width<<1) - 1)
 										  ball_y <= ball_y + ball_width;
 										else begin
 										      ball_dy <= 1'b1;
@@ -190,7 +190,7 @@ module game_FSM(
 											if(speed_counter > 1)
 											   speed_counter <= speed_counter - 1'b1;
 											end 
-									     else if (ball_y >= feature_size + border_size)
+									     else if (ball_y >= feature_size + ball_width + (ball_width<<1) + 1)
 												ball_y <= ball_y - ball_width;
 											else begin
 												ball_dy <= 1'b0;
