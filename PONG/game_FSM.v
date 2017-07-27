@@ -92,61 +92,61 @@ module game_FSM(
 				    else old_done <= done;
 				end
 			  
-			  if(x_pos == 1 && y_pos == 1) begin
-   			     case (state)
-			     STATE_RESET : begin
-				 	   ball_x <= screen_width >>1; // ball in the center of screen 
-					   ball_y <= screen_height >> 1;
-				  	   paddle2_x <= screen_width >> 1; // paddle2 up in center y coordonate stays the same
-					   paddle2_y <= border_size << 2;
-				 	   paddle1_x <= screen_width >> 1; // paddle 1 position in center of screen bottom with respect to border on y
-					   paddle1_y <= screen_height - (border_size << 2);
-				 	   state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
-					   score_player_1 <= 4'd0;//reset player scores
-					   score_player_2 <= 4'd0;
-					   speed_counter <= 6'd0;
-					   computer_counter <= 6'd0;
-				     	   player_mode <= 1'b0;	
-				     	   ball_speed <= 6'd5;
-				     	   computer_speed <= computer_speed_default;
-					   end
-			    STATE_PLAYER_SELECT :begin
-						 if (key_pressed == key_1) begin
-						    player_mode <= 1'b0;
-						    key_pressed <= 8'b0;
-						    end else if (key_pressed == key_2) begin
-								  player_mode <=1'b1;
-								  key_pressed <= 8'b0;
-								  end else if (key_pressed == SPACE_key) begin
-										key_pressed <= 8'b0;
-										state <= STATE_GAME;		
-										ball_dx <= 1'b1;//set ball speed and direction
-										ball_dy <= 1'b1;
-										ball_speed <= 6'd5;
-								                end
+			   if(x_pos == 1 && y_pos == 1) begin
+   			      case (state)
+			      STATE_RESET : begin
+				 	    ball_x <= screen_width >>1; // ball in the center of screen 
+					    ball_y <= screen_height >> 1;
+				  	    paddle2_x <= screen_width >> 1; // paddle2 up in center y coordonate stays the same
+					    paddle2_y <= border_size << 2;
+				 	    paddle1_x <= screen_width >> 1; // paddle 1 position in center of screen bottom with respect to border on y
+					    paddle1_y <= screen_height - (border_size << 2);
+				 	    state <= STATE_PLAYER_SELECT; // next state chosse whether single or multiplayer
+					    score_player_1 <= 4'd0;//reset player scores
+					    score_player_2 <= 4'd0;
+					    speed_counter <= 6'd0;
+					    computer_counter <= 6'd0;
+				     	    player_mode <= 1'b0;	
+				     	    ball_speed <= 6'd5;
+				     	    computer_speed <= computer_speed_default;
+					    end
+			     STATE_PLAYER_SELECT :begin
+						  if (key_pressed == key_1) begin
+						     player_mode <= 1'b0;
+						     key_pressed <= 8'b0;
+						     end else if (key_pressed == key_2) begin
+								   player_mode <=1'b1;
+								   key_pressed <= 8'b0;
+								   end else if (key_pressed == SPACE_key) begin
+										 key_pressed <= 8'b0;
+										 state <= STATE_GAME;		
+										 ball_dx <= 1'b1;//set ball speed and direction
+										 ball_dy <= 1'b1;
+										 ball_speed <= 6'd5;
+								                 end
 						   end
-			    STATE_GAME : begin
-					  if (key_pressed == SPACE_key) begin
-						state <= STATE_PAUSE;
-						key_pressed <= 8'b0;
-						end
+			     STATE_GAME : begin
+					   if (key_pressed == SPACE_key) begin
+						 state <= STATE_PAUSE;
+						 key_pressed <= 8'b0;
+						 end
 						else if (key_pressed == ESC_key) begin
-											    state <= STATE_RESET;
-											    key_pressed <= 8'b0;
-											    end	
+							 state <= STATE_RESET;
+							 key_pressed <= 8'b0;
+							 end	
 							else if (key_pressed == PLAYER_1_LEFT) begin 
-							if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
-								paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
-								key_pressed <= 8'b0;
-								end
-								else if (key_pressed == PLAYER_1_RIGHT) begin
-									if (paddle1_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
-									    paddle1_x <= paddle1_x + ball_width;
-									    key_pressed <= 8'b0;
-									    end 
-									    else if (key_pressed == PLAYER_2_LEFT) begin
-									        	if(player_mode)
-										  	  if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
+							      if (paddle1_x >= feature_size + ball_width + (paddle_width >> 1)) // check for overflow
+							   	  paddle1_x <= paddle1_x - ball_width; // move the paddle with ball width pixels to the left
+								  key_pressed <= 8'b0;
+								  end
+								 else if (key_pressed == PLAYER_1_RIGHT) begin
+									 if (paddle1_x <= screen_width - feature_size - ball_width - (paddle_width >> 1))
+									     paddle1_x <= paddle1_x + ball_width;
+									     key_pressed <= 8'b0;
+									     end 
+									     else if (key_pressed == PLAYER_2_LEFT) begin
+									        	 if(player_mode)
+										  	   if (paddle2_x >= feature_size + ball_width + (paddle_width >> 1))
 												paddle2_x <= paddle2_x - ball_width;
 											 	key_pressed <= 8'b0;
 												end
@@ -170,7 +170,7 @@ module game_FSM(
 									 ball_dy <= 1'b0;	
 									 if(ball_speed > 1)
 									    ball_speed <= ball_speed - 1'b1;
-									end
+									 end
 									else if (ball_y <= screen_height - feature_size - border_size)
 										  ball_y <= ball_y + ball_width;
 										else begin
@@ -178,18 +178,17 @@ module game_FSM(
 										      ball_x <= screen_width >> 1; 
 										      ball_y <= screen_height >> 1;
 										      ball_speed <= 6'd5;
-												paddle2_x <= screen_width >> 1; 
-												paddle2_y <= border_size << 2;
-												paddle1_x <= screen_width >> 1; 
-												paddle1_y <= screen_height - (border_size << 2);
+										      paddle2_x <= screen_width >> 1; 
+										      paddle2_y <= border_size << 2;
+										      paddle1_x <= screen_width >> 1; 
+										      paddle1_y <= screen_height - (border_size << 2);
 										      score_player_2 <= score_player_2 + 1'b1;
-												state <= STATE_PLAYER2_SCORE;
-										     
-										     end
+										      state <= STATE_PLAYER2_SCORE;
+										      end
 									else if ((ball_x >= paddle2_x - (paddle_width >> 1)) && (ball_x <= paddle2_x + (paddle_width >> 1)) && (ball_y == paddle2_y + ball_width)) begin
 											ball_dy <= 1'b1;
 											if(speed_counter > 1)
-												speed_counter <= speed_counter - 1'b1;
+											   speed_counter <= speed_counter - 1'b1;
 											end 
 									     else if (ball_y >= feature_size + border_size)
 												ball_y <= ball_y - ball_width;
