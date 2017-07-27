@@ -159,10 +159,10 @@ module game_FSM(
 						 if(speed_counter == ball_speed) begin
 								speed_counter <= 6'd0;
 								if(ball_dx) // to right
-								  if (ball_x <= screen_width - feature_size - border_size) // check for overflow
+									if (ball_x <= screen_width - feature_size - ball_width) // check for overflow
 									ball_x <= ball_x + ball_width;
 								    else ball_dx <= 1'b0;
-								   else if (ball_x >= feature_size + border_size)
+							 else if (ball_x >= feature_size + ball_width)
 									    ball_x <= ball_x - ball_width;
 									   else ball_dx <= 1'b1;
 								if(ball_dy) // to down
