@@ -80,7 +80,6 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 
 
 ##  game_FSM
-##  ================
 
 Acest modul reprezinta nucleul jocului pong. Contine automatul care controleaza flow-ul jocului si totodata logica jocului. El transmite ca
 si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecranul monitorului.
@@ -102,7 +101,7 @@ si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecra
 Starea de reset , starea in care sunt date pozitiile pe x,y pentru palete, pozitiile pe x,y pentru minge ( mingea este
  setata sa apara in centrul ecranului ). De asemenea paleta jucatorului 2 nu va aparea decat in momentul in care este selectat          modul multiplayer
 Se observa totusi ca :
-- Pentru paleta jucatorului 1 au fost lasate 12 coloane libere intre aceasta si border (paddle1_y <= screen_height - 			    (border_size << 2) linia de cod amintita insemnand faptul ca pozitia pe y a paletei o sa fie screen_height - border*4 =480-		    24 = 456. Pozitia pe x pentru ambele padduri
+- Pentru paleta jucatorului 1 au fost lasate 13 coloane libere intre aceasta si border (paddle1_y <= screen_height - 			    (border_size << 2) linia de cod amintita insemnand faptul ca pozitia pe y a paletei o sa fie screen_height - border*4 =480-		    24 = 456. Pozitia pe x pentru ambele padduri
 este identica fiind situata in centrul ecranului(320 = screen_width/2). Pozitia pe y a paletei jucatorului 2 este paddle2_y <= border_size << 2 adica 24
 ceea ce inseamna exact ca la pozitia pentru paddle 1 o diferenta de 24 linii ( ceea ce simbolizeaza sfarsitul lui feature_size + 13 linii lasate negre).
 Totodata in aceasta stare sunt resetate scorurile playerilor , counterul ce este folosit pentru a determina viteza cu care se 	   deplaseaza mingea  si counterul pentru computer care este folosit in acelasi mod.
@@ -114,18 +113,18 @@ prin care se alege modul de joc in functie de inputul primit de la tastatura. To
 
 ## 3. STATE_GAME :
 Aceasta este starea care contine logica efectiva a jocului , tranzitia in aceasta facandu-se din starea anterioara numai 		      la apasarea tastei SPACE.
-Logica acestei stari este urmatoarea , daca este apasat butonul SPACE se trece imediat in starea de pauza daca este apasat 	       butonul ESC se trece in starea de reset
+Logica acestei stari este urmatoarea , daca este apasat butonul SPACE se trece imediat in starea de pauza daca este apasat 	       butonul ESC se trece in starea de reset.
 Daca este apasata tasta A se verifica o conditie astfel incat sa nu se depaseasca zona destinata jocului (acel 			      feature_size + o jumatate de paleta + latura patratului din
-care e compusa mingea) Aceasta conditie este logica deoarece numarul de pixeli cu care se misca paleta este egal cu 		      ball_width si pentru o deplasare in stanga
+care e compusa mingea). Aceasta conditie este logica deoarece numarul de pixeli cu care se misca paleta este egal cu 		      ball_width si pentru o deplasare in stanga
 inseamna sa scad ball_width pixeli din pozitia curenta a padului si pentru a nu iesi din ecran trebuie sa tin cont de 		      feature size si jumatate din lungimea unui pad.
 La fel se intampla si in momentul in care se doreste o deplasare dreapta a padului doar ca de data aceasta pozitia pe x a 	      padului trebuie sa fie mai mica sau egala cu screen_witdh - aceleasi
 valori de care am tinut cont in partea stanga. Aceleasi lucruri se intampla identic si pentru player2 cu singura diferenta 		ca este verificat daca semnalul care
 spune modul jocului este activ.
-* De observat este ca : nu folosesc un counter pentru a permite vizualizarea pe  ecran a miscarii mingii respectiv a 			padului ci doar in momentul in care un frame complet este realizat(ceea ce inseamna actualizarea tuturor celor 640x480 e 		 pixeli)  ceea ce inseamna echivalentul unui counter care nuamara pana la  640x480. Acest lucru face ca miscarea padului si a bilei sa fie vizibile pentru 		ochiul uman.
+* De observat este ca : nu folosesc un counter pentru a permite vizualizarea pe  ecran a miscarii mingii respectiv a 			padului ci doar in momentul in care un frame complet este realizat(ceea ce inseamna actualizarea tuturor celor 640x480 de 		 pixeli) se poate actualiza pozitia paddului si a bilei,  ceea ce inseamna echivalentul unui counter care numara pana la  640x480. Acest lucru face ca miscarea padului si a bilei sa fie vizibile pentru 		ochiul uman.
 Avem un counter care numara pana la viteza bilei pe care am setat-o. In momentul in care acest counter atinge acea 			valoare este resetat si se verifica in primul rand daca directia bilei este
-la dreapta pe axa x ( ball_dx = 1). Daca directia este la dreapta se verifica conditia de overflow ( daca bila este in 			screen_width - feature_size - border_size) astfel incat bila sa nu iasa din suprafata de joc
+la dreapta pe axa x ( ball_dx = 1). Daca directia este la dreapta se verifica conditia de overflow ( daca bila este in 			screen_width - feature_size - ball_width) astfel incat bila sa nu iasa din suprafata de joc
 si se adauga la pozitia pe x a bilei inca un ball_width atata timp cat aceasta conditie este indeplinita.Altfel daca bila 		merge la stanga se verifica o conditie de overflow
-(feature_size + border_size) si se scade din pozitia curenta de pe axa x a bilei ball_width.Daca bila nu mai poate merge 		la stanga sau la dreapta (adica ambele conditii de overflow nu sunt indeplinite) inseamna ca bila
+(feature_size + ball_width) si se scade din pozitia curenta de pe axa x a bilei ball_width.Daca bila nu mai poate merge 		la stanga sau la dreapta (adica ambele conditii de overflow nu sunt indeplinite) inseamna ca bila
 loveste feature-ul si atunci directia  x (ball_dx)  este setata la 0 sau la 1 in functie de ce margine a ecranului va 			lovi (stanga sau dreapta).
 Daca directia pe y este setata inseamna ca bila merge in jos. In momentul in care bila merge in jos sunt 3 posibilitati :
 -fie bila loveste peretele lateral (feature-ul) mergand pe diagonala ori in stanga ori in dreapta in functie de directia 		pe x
