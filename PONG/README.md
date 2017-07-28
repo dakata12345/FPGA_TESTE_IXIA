@@ -129,6 +129,7 @@ loveste feature-ul si atunci directia  x (ball_dx)  este setata la 0 sau la 1 in
 
 Daca directia pe y este setata inseamna ca bila merge in jos. In momentul in care bila merge in jos sunt 3 posibilitati :
 
+ 
  -fie bila loveste peretele lateral (feature-ul) mergand pe diagonala ori in stanga ori in dreapta in functie de directia 		pe x
 
 - fie bila loveste padul
