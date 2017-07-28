@@ -41,6 +41,9 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
   ## Taste de control
               1 -> SinglePlayer (vs Computer)
               2 -> Multiplayer
+              R -> schimbarea culorii paddului pentru player1 in rosu
+              G -> schimbarea culorii paddului pentru player1 in verde
+              B -> schimbarea culorii paddului pentru player1 in albastru
               SPACE -> START/PAUSE
               ESC -> Exit current game 
               KEY1 de pee FPGA este RESET
