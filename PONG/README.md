@@ -50,6 +50,12 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 
 
 ## Top-level block diagram 
+ 
+ Modulul de top
+ 
+ ![Diagram](http://i.imgur.com/og4ZdG8.jpg)
+ 
+ 
  Aceasta reprezinta schema interconectarii blocurilor
 
 ![Diagram](http://i.imgur.com/9754B0A.jpg)
