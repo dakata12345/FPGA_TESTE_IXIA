@@ -78,7 +78,7 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 * keyboard –modul care se ocupa cu citirea datelor de la tastatura si verificarea corectitudinii acestora , totdata genereaza un semnal de done doar in momentul in care datele de la tastatura sunt diferite de F0 (break code)
 * game _FSM – automatul care controleaza jocul efectiv si contine logica de joc, contine 6 stari din fiecare stare se poate reveni la starea de reset
 * vga – modulul vga care asigura sincronizarea pentru ecranul monitorului si care transmite daca este in zona activa pozitia pe x si pe y  
-* pong_top - modulul de top in care sunt instantiate si conectate toate aceste module
+* pong - modulul de top in care sunt instantiate si conectate toate aceste module
 
 
 
