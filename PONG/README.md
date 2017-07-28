@@ -79,8 +79,8 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 
 
 
-  game_FSM
-================
+##  game_FSM
+##  ================
 
 Acest modul reprezinta nucleul jocului pong. Contine automatul care controleaza flow-ul jocului si totodata logica jocului. El transmite ca
 si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecranul monitorului.
