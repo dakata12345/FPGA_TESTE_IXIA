@@ -192,4 +192,8 @@ In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se p
   In rest culoarea transmisa este negru , inclusiv daca nu suntem in zona activa.
 
 
+ ## keyboard
+  Acest modul este responsabil cu datele transmise de la tastatura si cu generarea semnalului done care reprezinta faptul ca un frame complet a fost primit si datele transmise sunt corecte ( verificari ale bitilor de start/stop si paritate). De asemenea in interior este geenrat un semnal de skip (daca datele transmise sunt F0 - break code adica tasta a fost apasata si dupa a fost ridicata). Semnalul de done nu este activ decat daca frame-ul este corect(dpdv al datelor) si datele transmise sunt diferite de break code. Pentru acest modul am un testbench si voi atasa mai jos o imagine cu formele de unda obtinute. De asemenea in folderul PS2 din acest repo exista un modul de test mai intituiv ( afisarea codurilor transmise de tastatura pe segemente ).
   
+  
+ ![Diagram](http://i.imgur.com/y6Ykivl.png)
