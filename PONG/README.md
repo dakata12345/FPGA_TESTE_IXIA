@@ -166,7 +166,7 @@ In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se p
 
 ## Diagrama starilor automatului :
 
-  ![Diagram](http://imgur.com/y1QLqRG)
+  ![Diagram](http://i.imgur.com/y1QLqRG.png)
 
 ## Transmitrea culorilor catre ecranul monitorului
    Transmiterea culorilor este facuta tot de acest modul intr-un proces always sensibil la frontul pozitiv al ceasului, separat de cel al automatului.  
