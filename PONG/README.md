@@ -77,9 +77,11 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 * vga – modulul vga care asigura sincronizarea pentru ecranul monitorului si care transmite daca este in zona activa pozitia pe x si pe y  
 * pong_top - modulul de top in care sunt instantiate si conectate toate aceste module
 
-  
+
+
   game_FSM
 ================
+
 Acest modul reprezinta nucleul jocului pong. Contine automatul care controleaza flow-ul jocului si totodata logica jocului. El transmite ca
 si output scorurile pentru ambii jucatori si culorile ce trebuie afisate pe ecranul monitorului.
 
