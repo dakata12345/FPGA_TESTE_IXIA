@@ -92,7 +92,7 @@ module game_FSM(
 				    else old_done <= done;
 				end
 			  
-			   if(x_pos == 1 && y_pos == 1) begin
+				if(x_pos == 0 && y_pos == 0) begin
    			      case (state)
 			      STATE_RESET : begin
 				 	    ball_x <= screen_width >>1; // ball in the center of screen 
