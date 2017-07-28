@@ -126,9 +126,10 @@ la dreapta pe axa x ( ball_dx = 1). Daca directia este la dreapta se verifica co
 si se adauga la pozitia pe x a bilei inca un ball_width atata timp cat aceasta conditie este indeplinita.Altfel daca bila 		merge la stanga se verifica o conditie de overflow
 (feature_size + ball_width) si se scade din pozitia curenta de pe axa x a bilei ball_width.Daca bila nu mai poate merge 		la stanga sau la dreapta (adica ambele conditii de overflow nu sunt indeplinite) inseamna ca bila
 loveste feature-ul si atunci directia  x (ball_dx)  este setata la 0 sau la 1 in functie de ce margine a ecranului va 			lovi (stanga sau dreapta).
+
 Daca directia pe y este setata inseamna ca bila merge in jos. In momentul in care bila merge in jos sunt 3 posibilitati :
 
--fie bila loveste peretele lateral (feature-ul) mergand pe diagonala ori in stanga ori in dreapta in functie de directia 		pe x
+ -fie bila loveste peretele lateral (feature-ul) mergand pe diagonala ori in stanga ori in dreapta in functie de directia 		pe x
 
 - fie bila loveste padul
 
