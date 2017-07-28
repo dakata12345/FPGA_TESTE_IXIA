@@ -130,11 +130,11 @@ loveste feature-ul si atunci directia  x (ball_dx)  este setata la 0 sau la 1 in
 Daca directia pe y este setata inseamna ca bila merge in jos. In momentul in care bila merge in jos sunt 3 posibilitati :
 
  
- -fie bila loveste peretele lateral (feature-ul) mergand pe diagonala ori in stanga ori in dreapta in functie de directia 		pe x
+- fie bila loveste peretele lateral (feature-ul) mergand pe diagonala ori in stanga ori in dreapta in functie de directia 		pe x
 
 - fie bila loveste padul
 
--fie jucatorul 1 nu plaseaza padul in locatia corecta pentru a lovi mingea ceea ce inseamna ca este un punct pentru 			jucatorul 2
+- fie jucatorul 1 nu plaseaza padul in locatia corecta pentru a lovi mingea ceea ce inseamna ca este un punct pentru 			jucatorul 2
 
 Conditia pentru ca bila sa loveasca padul este urmatoarea ball_x >= paddle1_x - (paddle_width >> 1)) && (ball_x <= 		      paddle1_x + (paddle_width >> 1)) && (ball_y == paddle1_y - ball_width). Conditia este evidenta deoarece
 presupune exact suprapunerea pozitiei mingii pe x,y cu jumatatea superioara sau inferioara a padului( pozitia pe x a 		      podului si y reprezinta niste puncte de aceea este pusa aceasta conditie, practic este conditia care este folosita pentru
