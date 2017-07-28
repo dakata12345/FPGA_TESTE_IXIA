@@ -36,6 +36,9 @@ module game_FSM(
 					localparam SPACE_key = 8'h29; // SPACE 
 					localparam key_1 =8'h16; // 1
 					localparam key_2 =8'h1E; //2 Helps between chosing game modes ( single player vs multiplayer)
+					localparam R_key = 8'h2D; // R
+					localparam G_key = 8'h34; // SPACE 
+					localparam B_key =8'h32; // 1
 					
 					//GAME DETAILS
 					
@@ -64,6 +67,7 @@ module game_FSM(
 					localparam color_white =12'b111111111111;
 				   	localparam color_black =12'b000000000000;
 				   	localparam color_pink =12'b111001110110;
+						localparam color_green =12'b000011110000;
 					
 					//REG and WIRES declarations
 					
@@ -81,8 +85,9 @@ module game_FSM(
 					reg [5:0] computer_counter; // counter for computer player
 					reg [5:0] computer_speed; // computer speed register
 					reg player_mode; // 0 = single player ; 1 = multiplayer - 2 players
-					reg [2:0] state; // state
-			
+					reg [2:0] state; // state , next_state register
+					reg red_paddle,green_paddle,blue_paddle;
+					
 	always @(posedge clock or negedge reset)
 		if (~reset) state <= STATE_RESET;
 		    else begin
@@ -92,7 +97,7 @@ module game_FSM(
 				    else old_done <= done;
 				end
 			  
-				if(x_pos == 0 && y_pos == 0) begin
+			   if(x_pos == 0 && y_pos == 0) begin
    			      case (state)
 			      STATE_RESET : begin
 				 	    ball_x <= screen_width >>1; // ball in the center of screen 
@@ -109,6 +114,9 @@ module game_FSM(
 				     	    player_mode <= 1'b0;	
 				     	    ball_speed <= 6'd5;
 				     	    computer_speed <= computer_speed_default;
+							 red_paddle <= 1'b1;
+							 green_paddle <= 1'b0;
+							 blue_paddle <= 1'b0;
 					    end
 			     STATE_PLAYER_SELECT :begin
 						  if (key_pressed == key_1) begin
@@ -117,13 +125,32 @@ module game_FSM(
 						     end else if (key_pressed == key_2) begin
 								   player_mode <=1'b1;
 								   key_pressed <= 8'b0;
-								   end else if (key_pressed == SPACE_key) begin
-										 key_pressed <= 8'b0;
-										 state <= STATE_GAME;		
-										 ball_dx <= 1'b1;//set ball speed and direction
-										 ball_dy <= 1'b1;
-										 ball_speed <= 6'd5;
-								                 end
+								   end 
+									else if (key_pressed == R_key) begin
+													red_paddle <= 1'b1;
+													green_paddle <= 1'b0;
+													blue_paddle <= 1'b0;
+													key_pressed <= 8'b0;
+													end
+											else if (key_pressed == G_key) begin
+													red_paddle <= 1'b0;
+													green_paddle <= 1'b1;
+													blue_paddle <= 1'b0;
+													key_pressed <= 8'b0;
+													end
+											else if (key_pressed == B_key) begin
+													red_paddle <= 1'b0;
+													green_paddle <= 1'b0;
+													blue_paddle <= 1'b1;
+													key_pressed <= 8'b0;
+													end		
+													else if (key_pressed == SPACE_key) begin
+																key_pressed <= 8'b0;
+																state <= STATE_GAME;		
+																ball_dx <= 1'b1;//set ball speed and direction
+																ball_dy <= 1'b1;
+																ball_speed <= 6'd5;
+																end
 						   end
 			     STATE_GAME : begin
 					   if (key_pressed == SPACE_key) begin
@@ -166,14 +193,14 @@ module game_FSM(
 									    ball_x <= ball_x - ball_width;
 									   else ball_dx <= 1'b1;
 								if(ball_dy) // to down
-								    if ((ball_x >= paddle1_x - (paddle_width >> 1)) && (ball_x <= paddle1_x + (paddle_width >> 1)) && (ball_y == paddle1_y - ball_width)) begin
+								    if ((ball_x >= paddle1_x - (paddle_width >> 1)) && (ball_x <= paddle1_x + (paddle_width >> 1)) && (ball_y == paddle1_y - ball_width)) begin // paddle hit
 									 ball_dy <= 1'b0;	
 									 if(ball_speed > 1)
 									    ball_speed <= ball_speed - 1'b1;
 									 end
-									else if (ball_y <= screen_height - feature_size - ball_width - (ball_width<<1) - 1)
+									else if (ball_y <= screen_height - feature_size - ball_width - (ball_width<<1) - 1) // ball still in air coming down
 										  ball_y <= ball_y + ball_width;
-										else begin
+										else begin // ball hit under player 1 paddle -> player2 scores
 										      ball_dy <= 1'b1;
 										      ball_x <= screen_width >> 1; 
 										      ball_y <= screen_height >> 1;
@@ -185,7 +212,7 @@ module game_FSM(
 										      score_player_2 <= score_player_2 + 1'b1;
 										      state <= STATE_PLAYER2_SCORE;
 										      end
-									else if ((ball_x >= paddle2_x - (paddle_width >> 1)) && (ball_x <= paddle2_x + (paddle_width >> 1)) && (ball_y == paddle2_y + ball_width)) begin
+									else if ((ball_x >= paddle2_x - (paddle_width >> 1)) && (ball_x <= paddle2_x + (paddle_width >> 1)) && (ball_y == paddle2_y + ball_width)) begin // same logic for player2
 											ball_dy <= 1'b1;
 											if(speed_counter > 1)
 											   speed_counter <= speed_counter - 1'b1;
@@ -271,16 +298,18 @@ end
 						color <= color_pink;
 						
 						//paddle1 bottom	
-					else if (x_pos >= paddle1_x  - (paddle_width >> 1) && x_pos <= paddle1_x + (paddle_width >> 1) && y_pos >= paddle1_y - (paddle_height >> 1) && y_pos <= paddle1_y  + (paddle_height >> 1))
-								color <= color_red;
-				
+					else if (x_pos >= paddle1_x  - (paddle_width >> 1) && x_pos <= paddle1_x + (paddle_width >> 1) && y_pos >= paddle1_y - (paddle_height >> 1) && y_pos <= paddle1_y  + (paddle_height >> 1)) begin
+								if (red_paddle) color <= color_red;
+									else if (green_paddle) color <= color_green;
+											else if (blue_paddle) color <= color_blue;
+											end
 						//paddle2 top
 						else if (x_pos >= paddle2_x  - (paddle_width >> 1) && x_pos <= paddle2_x + (paddle_width >> 1) && y_pos >= paddle2_y - (paddle_height >> 1) && y_pos <= paddle2_y  + (paddle_height >> 1))
 									if(state == STATE_PLAYER_SELECT)
 										if(player_mode)
-											color <= color_red;
+											color <= color_blue;
 											else	color <= color_black;
-									else	color <= color_red;
+									else	color <= color_green;
 				
 							//ball
 							else if (x_pos >= ball_x  - (ball_width >> 1) && x_pos <= ball_x + (ball_width >> 1) && y_pos >= ball_y - (ball_height >> 1) && y_pos <= ball_y  + (ball_height >> 1))
