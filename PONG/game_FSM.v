@@ -81,7 +81,7 @@ module game_FSM(
 					reg [5:0] computer_counter; // counter for computer player
 					reg [5:0] computer_speed; // computer speed register
 					reg player_mode; // 0 = single player ; 1 = multiplayer - 2 players
-					reg [2:0] state; // state , next_state register
+					reg [2:0] state; // state
 			
 	always @(posedge clock or negedge reset)
 		if (~reset) state <= STATE_RESET;
