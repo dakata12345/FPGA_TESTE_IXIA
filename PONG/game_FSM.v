@@ -304,13 +304,14 @@ end
 											else if (blue_paddle) color <= color_blue;
 											end
 						//paddle2 top
-						else if (x_pos >= paddle2_x  - (paddle_width >> 1) && x_pos <= paddle2_x + (paddle_width >> 1) && y_pos >= paddle2_y - (paddle_height >> 1) && y_pos <= paddle2_y  + (paddle_height >> 1))
+					else if (x_pos >= paddle2_x  - (paddle_width >> 1) && x_pos <= paddle2_x + (paddle_width >> 1) && y_pos >= paddle2_y - (paddle_height >> 1) && y_pos <= paddle2_y  + (paddle_height >> 1)) begin
 									if(state == STATE_PLAYER_SELECT)
 										if(player_mode)
 											color <= color_blue;
 											else	color <= color_black;
-									else	color <= color_green;
-				
+									else if (~player_mode) color <= color_green;
+											else if (player_mode) color <= color_blue;
+									end
 							//ball
 							else if (x_pos >= ball_x  - (ball_width >> 1) && x_pos <= ball_x + (ball_width >> 1) && y_pos >= ball_y - (ball_height >> 1) && y_pos <= ball_y  + (ball_height >> 1))
 									color <= color_white;
