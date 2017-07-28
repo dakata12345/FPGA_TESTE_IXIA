@@ -230,4 +230,4 @@ In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se p
        - un mesaj pentru castigator sau un mesaj de gameover
        - credite afisate pe ecran
        
-[b] Multumesc pentru rabdare ! [b]
+# Multumesc pentru rabdare ! 
