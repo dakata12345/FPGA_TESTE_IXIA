@@ -54,7 +54,7 @@ begin
 		10: parity <= ps2_data;
 		11:begin
 			stop <= ps2_data;
-			if ((parity == ~(tasta[7]^tasta[6]^tasta[5]^tasta[4]^tasta[3]^tasta[2]^tasta[1]^tasta[0]) & stop)) begin	  
+			if ((parity == ~(tasta[7]^tasta[6]^tasta[5]^tasta[4]^tasta[3]^tasta[2]^tasta[1]^tasta[0]) & ps2_data)) begin	  
 		   	 if(tasta == 8'hF0)
 						skip <= 1;
 			    else if (!skip)
