@@ -164,7 +164,9 @@ Starea este evidenta , se poate iesi din aceasta stare apasand pe space pentru a
 ## 6. STATE_PAUSE :
 In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se paote iesi apasand pe SPACE pentru a 			  relua jocul sau ESC pentru reset.
 
+## Diagrama starilor automatului :
 
+  ![Diagram](http://imgur.com/y1QLqRG)
 
 ## Transmitrea culorilor catre ecranul monitorului
    Transmiterea culorilor este facuta tot de acest modul intr-un proces always sensibil la frontul pozitiv al ceasului, separat de cel al automatului.  
