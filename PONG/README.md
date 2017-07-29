@@ -192,4 +192,42 @@ In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se p
   In rest culoarea transmisa este negru , inclusiv daca nu suntem in zona activa.
 
 
+
+
+## Modulul keyboard
+  Acest modul este responsabil cu datele transmise de la tastatura si cu generarea semnalului done care reprezinta faptul ca un frame complet a fost primit si datele transmise sunt corecte ( verificari ale bitilor de start/stop si paritate). De asemenea in interior este geenrat un semnal de skip (daca datele transmise sunt F0 - break code adica tasta a fost apasata si dupa a fost ridicata). Semnalul de done nu este activ decat daca frame-ul este corect(dpdv al datelor) si datele transmise sunt diferite de break code. Pentru acest modul am un testbench si voi atasa mai jos o imagine cu formele de unda obtinute. De asemenea in folderul PS2 din acest repo exista un modul de test mai intituiv ( afisarea codurilor transmise de tastatura pe segmente ).
   
+  
+ ![Diagram](http://i.imgur.com/y6Ykivl.png)
+ 
+ 
+ Din forma de unda se observa un comportament adecvat , de asemenea se observa ca sunt transmise date pe langa F0 dar simularea fiind foarte rapida iar datele fiind transmise la un interval foarte rapid (microsecunde poate chiar nanosecunde) acestea se pierd deoarece semnalul de done nu se actualizeaza suficient de rapid , dar datorita faptului ca nu este posibil ca datele sa fie transmise asa rapid de catre un om , pierderile tind catre 0.
+ 
+ 
+ 
+ ## Modulul VGA
+ 
+ Aceste reprezinta modululde sincronizare. Pentru acest modulul nu am avut nevoie de un testbench deoarece functionalitatea modulului poate fi vazuta imediat pe ecranul unui monitor. Mentionez ca folosind modulul de aici doar schimband anumiti parametri si ceasul in functie de rezolutie se poate crea orice rezolutie.
+ 
+ 
+ 
+ ## Modulul clk_divider
+   Acesta este un divizor de ceas folosit pentru a diviza cu doi frecventa ceasului de 50Mhz de pe placa DE1 pentru a-l da ca input pt modulul de vga care necesita un ceas de 25Mhz pentru a reda imaginea.
+   
+   
+## Modulul pong
+ Modulul de top in care sunt conectate toate celelalte module 
+ 
+ 
+ 
+# COMENTARII
+  - in modul multiplayer jucatorii nu pot apasa simultan pe taste deoarece se pierd datele transmise -> pentru rezolvare ar trebui ca datele primite de la tastatura sa fie salvate intr-un FIFO si apoi date ca input la automatul care contine logica jocului
+  - imbunatatiri care pot fi aduse : 
+       - adaugarea pe ecran a scorurilor
+       - un logo pe ecran ( se poate face o stare intreaga iar tranzitia se poate face dupa un anumit interval de timp)
+       - un set de reguli care sa apara pe ecran de asemena si instructiuni de folosire
+       - sunete la lovirea de perete si de pad a mingii
+       - un mesaj pentru castigator sau un mesaj de gameover
+       - credite afisate pe ecran
+       
+# Multumesc pentru rabdare ! 
