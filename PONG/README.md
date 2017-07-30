@@ -31,11 +31,11 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
  
 ## Tastele folosite
   ## PLAYER1:
-            A -> miscarea plaetei catre stanga
+            A -> miscarea paletei catre stanga
             D -> miscarea paletei catre dreapta
   
   ## PLAYER2:
-            J -> miscarea plaetei catre stanga
+            J -> miscarea paletei catre stanga
             L -> miscarea paletei catre dreapta  
   
   ## Taste de control
@@ -72,7 +72,7 @@ Jocul a fost inițial produs de Atari Incorporated (Atari), care l-a lansat în 
 
 * h_sync, 
 * v_sync, 
-* color  (primii 4 biti reprezinta culaorea rosu urmatorii 4 verde si ultimii patru albastru , acestia sunt legati la portul VGA)
+* color  (primii 4 biti reprezinta culoarea rosu urmatorii 4 verde si ultimii patru albastru , acestia sunt legati la portul VGA)
 * out_1 (reprezinta scorul PLAYER1 si e legat la HEX0 de pe afisajul cu 7 segmente)
 * out_2 (reprezinta scorul PLAYER2 si e legat la HEX3 de pe afisajul cu 7 segmente)
 * out_3 ( mereu high stinge segmentul HEX1)
