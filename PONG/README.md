@@ -209,7 +209,7 @@ In starea de pauza se poate intra doar din starea de joc. Din aceasta stare se p
  
  Aceste reprezinta modululde sincronizare. Pentru acest modulul nu am avut nevoie de un testbench deoarece functionalitatea modulului poate fi vazuta imediat pe ecranul unui monitor dar am hotarat sa fac unul. Mentionez ca folosind modulul de aici doar schimband anumiti parametri si ceasul in functie de rezolutie se poate crea orice rezolutie.
  
- http://i.imgur.com/yIXQuzC.png
+ ![Diagram](http://i.imgur.com/yIXQuzC.png)
  
  
  
