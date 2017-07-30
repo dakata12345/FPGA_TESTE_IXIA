@@ -114,9 +114,9 @@ module game_FSM(
 				     	    player_mode <= 1'b0;	
 				     	    ball_speed <= 6'd5;
 				     	    computer_speed <= computer_speed_default;
-							 red_paddle <= 1'b1;
-							 green_paddle <= 1'b0;
-							 blue_paddle <= 1'b0;
+					    red_paddle <= 1'b1;
+					    green_paddle <= 1'b0;
+					    blue_paddle <= 1'b0;
 					    end
 			     STATE_PLAYER_SELECT :begin
 						  if (key_pressed == key_1) begin
