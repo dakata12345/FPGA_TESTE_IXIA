@@ -1,6 +1,5 @@
 
 
-
 module sram
 	(
 		input  clk,
@@ -66,10 +65,10 @@ module sram
 						end
 					end else begin
 						oe_n_out	<=	1'b1;
-						ce_n_out	<=	1'b0;
+						ce_n_out	<=	1'b1;
 						we_n_out	<=	1'b1;
 						done_out	<=	1'b1;
-						addr_out	<=	18'b0;
+						addr_out	<=	18'bz;
 						state		<=	idle;
 					end
 				end
@@ -101,6 +100,7 @@ module sram
 			if(addr_in[18]) begin
 				ub_n_out=1'b0;
 				lb_n_out=1'b1;
+				w_data[7:0] = 8'bz;
 				w_data[15:8]=w_data_in;
 				r_data_out = 8'bz;
 				end 
@@ -108,6 +108,7 @@ module sram
 				  ub_n_out<=1'b1;
 				  lb_n_out<=1'b0;
 				  w_data[7:0]<=w_data_in;
+				  w_data[15:8]=8'bz;
 				  r_data_out = 8'bz;
 				  end
 		end 
@@ -116,11 +117,13 @@ module sram
 						ub_n_out=1'b0;
 						lb_n_out=1'b1;
 						r_data_out[7:0] =r_data[15:8];
+						w_data = 16'bz;
 						end 
 					else begin
 							ub_n_out=1'b1;
 							lb_n_out=1'b0;
 							r_data_out[7:0] =r_data[7:0];
+							w_data = 16'bz;
 							end
 				 end
 	end
